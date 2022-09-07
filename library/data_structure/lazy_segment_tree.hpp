@@ -46,7 +46,7 @@ class LazySegmentTree {
         }
     }
 
-    void update(int left, int right, const E& x) {
+    void update(int left, int right, const E& g) {
         if (left < 0) left = 0;
         if (right > sz) right = sz;
         left += sz;
@@ -57,12 +57,12 @@ class LazySegmentTree {
 
         for (int l = left, r = right; l < r; l >>= 1, r >>= 1) {
             if (l & 1) {
-                lazy[l] = cp(lazy[l], x);
+                lazy[l] = cp(lazy[l], g);
                 ++l;
             }
             if (r & 1) {
                 --r;
-                lazy[r] = cp(lazy[r], x);
+                lazy[r] = cp(lazy[r], g);
             }
         }
 
