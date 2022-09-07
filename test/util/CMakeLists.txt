@@ -1,0 +1,15 @@
+add_executable(CoordinateCompressionTest coordinate_compression_test.cpp)
+target_link_libraries(CoordinateCompressionTest gtest_main)
+gtest_discover_tests(CoordinateCompressionTest)
+
+add_executable(ChminChmaxTest chmin_chmax_test.cpp)
+target_link_libraries(ChminChmaxTest gtest_main)
+gtest_discover_tests(ChminChmaxTest)
+
+add_executable(MoTest mo_test.cpp)
+target_link_libraries(MoTest gtest_main)
+gtest_discover_tests(MoTest)
+
+add_executable(TimerTest timer_test.cpp)
+target_link_libraries(TimerTest gtest_main)
+gtest_discover_tests(TimerTest)

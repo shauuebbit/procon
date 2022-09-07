@@ -1,0 +1,11 @@
+add_executable(Dijkstra dijkstra_test.cpp)
+target_link_libraries(Dijkstra gtest_main)
+gtest_discover_tests(Dijkstra)
+
+add_executable(DinicTest dinic_test.cpp)
+target_link_libraries(DinicTest gtest_main)
+gtest_discover_tests(DinicTest)
+
+add_executable(FordFulkersonTest ford_fulkerson_test.cpp)
+target_link_libraries(FordFulkersonTest gtest_main)
+gtest_discover_tests(FordFulkersonTest)

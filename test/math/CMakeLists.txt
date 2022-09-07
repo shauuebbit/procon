@@ -1,0 +1,27 @@
+add_executable(BinomialCoefficientsTest binomial_coefficients_test.cpp)
+target_link_libraries(BinomialCoefficientsTest gtest_main)
+gtest_discover_tests(BinomialCoefficientsTest)
+
+add_executable(FastFourierTransformTest fast_fourier_transform_test.cpp)
+target_link_libraries(FastFourierTransformTest gtest_main)
+gtest_discover_tests(FastFourierTransformTest)
+
+add_executable(GCDTest gcd_test.cpp)
+target_link_libraries(GCDTest gtest_main)
+gtest_discover_tests(GCDTest)
+
+add_executable(InverseTest inverse_test.cpp)
+target_link_libraries(InverseTest gtest_main)
+gtest_discover_tests(InverseTest)
+
+add_executable(MatrixProductTest matrix_product_test.cpp)
+target_link_libraries(MatrixProductTest gtest_main)
+gtest_discover_tests(MatrixProductTest)
+
+add_executable(ModIntTest modint_test.cpp)
+target_link_libraries(ModIntTest gtest_main)
+gtest_discover_tests(ModIntTest)
+
+add_executable(PowerTest power_test.cpp)
+target_link_libraries(PowerTest gtest_main)
+gtest_discover_tests(PowerTest)

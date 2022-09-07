@@ -1,0 +1,11 @@
+add_executable(ArgSortTest arg_sort_test.cpp)
+target_link_libraries(ArgSortTest gtest_main)
+gtest_discover_tests(ArgSortTest)
+
+add_executable(ConvexHullTest convex_hull_test.cpp)
+target_link_libraries(ConvexHullTest gtest_main)
+gtest_discover_tests(ConvexHullTest)
+
+add_executable(PointTest point_test.cpp)
+target_link_libraries(PointTest gtest_main)
+gtest_discover_tests(PointTest)
