@@ -5,8 +5,6 @@
 #include <random>
 #include <vector>
 
-#include "geometry/arg_sort.hpp"
-
 using namespace std;
 
 TEST(ConvexHullTest, PointSmall) {
