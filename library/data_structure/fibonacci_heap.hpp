@@ -136,6 +136,8 @@ class FibonacciHeap {
 
         std::shared_ptr<Node> parent = node_ptr->parent.lock();
 
+        if (!parent && min_node_ptr->key <= node_ptr->key) return;
+
         node_ptr = shrink(node_ptr);
 
         min_node_ptr = merge(min_node_ptr, node_ptr);
@@ -147,9 +149,9 @@ class FibonacciHeap {
                 cut(parent);
             else
                 parent->marked = true;
-        }
 
-        node_ptr->parent.reset();
+            node_ptr->parent.reset();
+        }
     }
 
    public:
