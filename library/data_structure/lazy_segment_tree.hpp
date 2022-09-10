@@ -46,6 +46,21 @@ class LazySegmentTree {
         }
     }
 
+    bool update(int index, const M& x) {
+        if (index < 0 || index >= sz) return false;
+
+        index += sz;
+
+        propagate_topdown(index);
+
+        data[index] = x;
+        lazy[index] = id;
+
+        recalc(index);
+
+        return true;
+    }
+
     void update(int left, int right, const E& g) {
         if (left < 0) left = 0;
         if (right > sz) right = sz;
