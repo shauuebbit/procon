@@ -33,12 +33,10 @@ TEST(ConvexHullTest, Line) {
 
     auto ch = convex_hull(points);
 
-    arg_sort(ch);
-
     ASSERT_EQ(ch.size(), 2);
 
-    ASSERT_EQ(ch[0], Point<int>(20, 10));
-    ASSERT_EQ(ch[1], Point<int>(-100, -50));
+    ASSERT_EQ(ch[0], Point<int>(-100, -50));
+    ASSERT_EQ(ch[1], Point<int>(20, 10));
 }
 
 TEST(ConvexHullTest, HorizontalLine) {
@@ -47,12 +45,10 @@ TEST(ConvexHullTest, HorizontalLine) {
 
     auto ch = convex_hull(points);
 
-    arg_sort(ch);
-
     ASSERT_EQ(ch.size(), 2);
 
-    ASSERT_EQ(ch[0], Point<int>(3, 2));
-    ASSERT_EQ(ch[1], Point<int>(-1, 2));
+    ASSERT_EQ(ch[0], Point<int>(-1, 2));
+    ASSERT_EQ(ch[1], Point<int>(3, 2));
 }
 
 TEST(ConvexHullTest, VerticalLine) {
@@ -61,12 +57,10 @@ TEST(ConvexHullTest, VerticalLine) {
 
     auto ch = convex_hull(points);
 
-    arg_sort(ch);
-
     ASSERT_EQ(ch.size(), 2);
 
-    ASSERT_EQ(ch[0], Point<int>(-1, 3));
-    ASSERT_EQ(ch[1], Point<int>(-1, -10));
+    ASSERT_EQ(ch[0], Point<int>(-1, -10));
+    ASSERT_EQ(ch[1], Point<int>(-1, 3));
 }
 
 TEST(ConvexHullTest, RandomLarge) {
@@ -89,8 +83,6 @@ TEST(ConvexHullTest, RandomLarge) {
         }
 
         auto ch = convex_hull(points);
-
-        arg_sort(ch);
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < ch.size(); j++) {
