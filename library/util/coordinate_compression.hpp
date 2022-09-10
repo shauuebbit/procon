@@ -39,13 +39,13 @@ class Compressor {
         return true;
     }
 
-    T compress(const T& x) {
+    int compress(const T& x) {
         if (!compressed) build();
 
         return zip[x];
     }
 
-    int uncompress(int ord) {
+    T uncompress(int ord) {
         if (!compressed) build();
 
         return unzip[ord];
