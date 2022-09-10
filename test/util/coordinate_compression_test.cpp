@@ -53,3 +53,19 @@ TEST(CoordinateCompressionTest, ConstructWithVector) {
         ASSERT_EQ(cmp.compress(cmp.uncompress(i)), i);
     }
 }
+
+TEST(CoordinateCompressionTest, Range) {
+    vector<int> v = {1, 2, 3, 5, 7, 8};
+    Compressor<int> cmp(v);
+
+    ASSERT_EQ(cmp.compress(0), -1);
+    ASSERT_EQ(cmp.compress(1), 0);
+    ASSERT_EQ(cmp.compress(2), 1);
+    ASSERT_EQ(cmp.compress(3), 2);
+    ASSERT_EQ(cmp.compress(4), 2);
+    ASSERT_EQ(cmp.compress(5), 3);
+    ASSERT_EQ(cmp.compress(6), 3);
+    ASSERT_EQ(cmp.compress(7), 4);
+    ASSERT_EQ(cmp.compress(8), 5);
+    ASSERT_EQ(cmp.compress(9), 5);
+}
