@@ -70,28 +70,32 @@ TEST(ConvexHullTest, VerticalLine) {
 }
 
 TEST(ConvexHullTest, RandomLarge) {
-    int n = 10000;
+    int t = 100;
 
-    const int MAX = 1000;
+    while (t--) {
+        int n = 10000;
 
-    random_device seed_gen;
-    mt19937 engine(seed_gen());
+        const int MAX = 1000;
 
-    uniform_int_distribution<> dist(-MAX, MAX);
+        random_device seed_gen;
+        mt19937 engine(seed_gen());
 
-    vector<Point<int>> points(n);
+        uniform_int_distribution<> dist(-MAX, MAX);
 
-    for (int i = 0; i < n; i++) {
-        points[i] = {dist(engine), dist(engine)};
-    }
+        vector<Point<int>> points(n);
 
-    auto ch = convex_hull(points);
+        for (int i = 0; i < n; i++) {
+            points[i] = {dist(engine), dist(engine)};
+        }
 
-    arg_sort(ch);
+        auto ch = convex_hull(points);
 
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < ch.size(); j++) {
-            ASSERT_GE(cross(ch[(j + 1) % ch.size()] - ch[j], points[i] - ch[j]), 0);
+        arg_sort(ch);
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < ch.size(); j++) {
+                ASSERT_GE(cross(ch[(j + 1) % ch.size()] - ch[j], points[i] - ch[j]), 0);
+            }
         }
     }
 }
