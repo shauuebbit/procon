@@ -3,10 +3,11 @@
 #include <gtest/gtest.h>
 
 #include <queue>
+#include <set>
 
 using namespace std;
 
-TEST(FibonacciHeapTest, PUSH_LARGE) {
+TEST(FibonacciHeapTest, PushLarge) {
     FibonacciHeap<int> heap;
     priority_queue<int, vector<int>, greater<int>> pq;
 
@@ -21,7 +22,7 @@ TEST(FibonacciHeapTest, PUSH_LARGE) {
     }
 }
 
-TEST(FibonacciHeapTest, POP_LARGE) {
+TEST(FibonacciHeapTest, PopLarge) {
     FibonacciHeap<int> heap;
     priority_queue<int, vector<int>, greater<int>> pq;
 
@@ -45,7 +46,7 @@ TEST(FibonacciHeapTest, POP_LARGE) {
     ASSERT_TRUE(heap.empty());
 }
 
-TEST(FibonacciHeapTest, PUSH_POP_LARGE) {
+TEST(FibonacciHeapTest, PushPopLarge) {
     FibonacciHeap<int> heap;
     priority_queue<int, vector<int>, greater<int>> pq;
 
@@ -134,4 +135,29 @@ TEST(FibonacciHeapTest, DecreaseKey2) {
     heap.decrease_key(1, 90);
 
     ASSERT_EQ(heap.get_key(1), 10);
+}
+
+TEST(FibonacciHeapTest, PushPopEraseLarge) {
+    FibonacciHeap<int> heap;
+    vector<int> keys;
+    set<int> s;
+
+    for (int i = 0; i < 300000; i++) {
+        if (i % 1000 != 1 && i % 20 != 5) {
+            heap.push(i * (i % 2 ? 1 : -1));
+            s.insert(i * (i % 2 ? 1 : -1));
+            keys.push_back(i * (i % 2 ? 1 : -1));
+        } else if (i % 1000 == 1) {
+            heap.pop();
+            s.erase(s.begin());
+        } else if (keys.size() >= 5000) {
+            heap.erase(keys.size() - 5000);
+            s.erase(keys[keys.size() - 5000]);
+        }
+
+        if (!s.empty()) {
+            ASSERT_EQ(heap.top().second, *(s.begin()));
+            ASSERT_EQ(heap.size(), s.size());
+        }
+    }
 }

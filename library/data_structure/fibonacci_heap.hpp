@@ -136,6 +136,8 @@ class FibonacciHeap {
 
         std::shared_ptr<Node> parent = node_ptr->parent.lock();
 
+        if (!parent && min_node_ptr->key <= node_ptr->key) return;
+
         node_ptr = shrink(node_ptr);
 
         min_node_ptr = merge(min_node_ptr, node_ptr);
@@ -147,9 +149,9 @@ class FibonacciHeap {
                 cut(parent);
             else
                 parent->marked = true;
-        }
 
-        node_ptr->parent.reset();
+            node_ptr->parent.reset();
+        }
     }
 
    public:
@@ -188,7 +190,7 @@ class FibonacciHeap {
         return true;
     }
 
-    bool contains(size_t id) { return !node_pool[id].expired(); }
+    bool contains(size_t id) { return id >= node_pool.size() || !node_pool[id].expired(); }
 
     K get_key(size_t id) { return node_pool[id].lock()->key; }
 
@@ -201,6 +203,37 @@ class FibonacciHeap {
         node_ptr->key -= diff;
 
         cut(node_ptr);
+
+        return true;
+    }
+
+    bool erase(size_t id) {
+        if (!contains(id)) return false;
+
+        std::shared_ptr<Node> node_ptr = node_pool[id].lock();
+
+        if (node_ptr == min_node_ptr) return pop();
+
+        for (std::shared_ptr<Node> p = node_ptr->child; p;) {
+            std::shared_ptr<Node> q = p;
+            p = p->right;
+            q = shrink(q);
+            min_node_ptr = merge(min_node_ptr, q);
+        }
+
+        std::shared_ptr<Node> parent = node_ptr->parent.lock();
+        node_ptr = shrink(node_ptr);
+
+        if (parent) {
+            --(parent->rank);
+
+            if (parent->marked)
+                cut(parent);
+            else
+                parent->marked = true;
+        }
+
+        --sz;
 
         return true;
     }
