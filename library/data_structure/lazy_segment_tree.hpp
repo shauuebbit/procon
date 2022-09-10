@@ -34,9 +34,9 @@ class LazySegmentTree {
     }
 
    public:
-    LazySegmentTree(int sz, const F& op, const A& act, const G& cp, const M& e, const E& id) : op(op), act(act), cp(cp), e(e), id(id), sz(sz), data(1 << sz, e), lazy(1 << sz, id) {}
+    LazySegmentTree(int sz, const F& op, const A& act, const G& cp, const M& e, const E& id) : op(op), act(act), cp(cp), e(e), id(id), sz(sz), data(sz << 1, e), lazy(sz << 1, id) {}
 
-    LazySegmentTree(const std::vector<M>& v, const F& op, const A& act, const G& cp, const M& e, const E& id) : op(op), act(act), cp(cp), e(e), id(id), sz(v.size()), data(1 << v.size(), e), lazy(1 << v.size(), id) {
+    LazySegmentTree(const std::vector<M>& v, const F& op, const A& act, const G& cp, const M& e, const E& id) : op(op), act(act), cp(cp), e(e), id(id), sz(v.size()), data(v.size() << 1, e), lazy(v.size() << 1, id) {
         for (int i = 0; i < sz; i++) {
             data[i + sz] = v[i];
         }
@@ -46,7 +46,7 @@ class LazySegmentTree {
         }
     }
 
-    void update(int left, int right, const E& x) {
+    void update(int left, int right, const E& g) {
         if (left < 0) left = 0;
         if (right > sz) right = sz;
         left += sz;
@@ -57,12 +57,12 @@ class LazySegmentTree {
 
         for (int l = left, r = right; l < r; l >>= 1, r >>= 1) {
             if (l & 1) {
-                lazy[l] = cp(lazy[l], x);
+                lazy[l] = cp(lazy[l], g);
                 ++l;
             }
             if (r & 1) {
                 --r;
-                lazy[r] = cp(lazy[r], x);
+                lazy[r] = cp(lazy[r], g);
             }
         }
 
