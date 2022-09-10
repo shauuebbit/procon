@@ -10,6 +10,10 @@ add_executable(FibonacciHeapTest fibonacci_heap_test.cpp)
 target_link_libraries(FibonacciHeapTest gtest_main)
 gtest_discover_tests(FibonacciHeapTest)
 
+add_executable(LazySegmentTreeTest lazy_segment_tree_test.cpp)
+target_link_libraries(LazySegmentTreeTest gtest_main)
+gtest_discover_tests(LazySegmentTreeTest)
+
 add_executable(SegmentTreeTest segment_tree_test.cpp)
 target_link_libraries(SegmentTreeTest gtest_main)
 gtest_discover_tests(SegmentTreeTest)
