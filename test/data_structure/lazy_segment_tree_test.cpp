@@ -144,6 +144,80 @@ TEST(LazySegmentTreeTest, RangeAddRangeMinimumQuery) {
     }
 }
 
+TEST(LazySegmentTreeTest, PointUpdateRangeAddRangeMinimumQuery) {
+    int n = 4000;
+    int q = 50000;
+
+    const int MAX = 1e5;
+    random_device seed_gen;
+    mt19937 engine(seed_gen());
+
+    uniform_int_distribution<> dist_idx(0, n - 1);
+    uniform_int_distribution<> dist_val(-MAX, MAX);
+
+    const long long INF = 1ll << 60;
+
+    using M = long long;
+    using E = long long;
+
+    auto op = [](const M& x, const M& y) {
+        return min(x, y);
+    };
+
+    auto cp = [](const E& f, const E& g) {
+        return f + g;
+    };
+
+    auto act = [](const M& x, const E& f) -> M {
+        return x + f;
+    };
+
+    const M e = INF;
+    const E id = 0ll;
+
+    LazySegmentTree<M, E, decltype(op), decltype(act), decltype(cp)> segtree(n, op, act, cp, e, id);
+
+    vector<M> a(n, e);
+
+    for (int t = 0; t < q; t++) {
+        int l = dist_idx(engine);
+        int r = dist_idx(engine);
+
+        if (l > r) swap(l, r);
+        ++r;
+
+        M x = dist_val(engine);
+
+        for (int i = l; i < r; i++) {
+            a[i] += x;
+        }
+
+        segtree.update(l, r, x);
+
+        if ((t >> 2) & 1) {
+            int i = dist_idx(engine);
+
+            M x = dist_val(engine);
+            a[i] = x;
+            segtree.update(i, x);
+        }
+
+        l = dist_idx(engine);
+        r = dist_idx(engine);
+
+        if (l > r) swap(l, r);
+        ++r;
+
+        x = e;
+
+        for (int i = l; i < r; i++) {
+            x = op(x, a[i]);
+        }
+
+        ASSERT_EQ(segtree.fold(l, r), x);
+    }
+}
+
 TEST(LazySegmentTreeTest, RangeUpdateRangeSumQuery) {
     int n = (1 << 12) - 1;
     int q = 50000;
