@@ -48,4 +48,6 @@ class SegmentTree {
 
         return op(l, r);
     }
+
+    M fold() { return fold(0, sz); }
 };
