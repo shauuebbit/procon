@@ -6,7 +6,7 @@
 
 using namespace std;
 
-TEST(FibonacciHeapTest, PUSH_LARGE) {
+TEST(FibonacciHeapTest, PushLarge) {
     FibonacciHeap<int> heap;
     priority_queue<int, vector<int>, greater<int>> pq;
 
@@ -21,7 +21,7 @@ TEST(FibonacciHeapTest, PUSH_LARGE) {
     }
 }
 
-TEST(FibonacciHeapTest, POP_LARGE) {
+TEST(FibonacciHeapTest, PopLarge) {
     FibonacciHeap<int> heap;
     priority_queue<int, vector<int>, greater<int>> pq;
 
@@ -45,7 +45,7 @@ TEST(FibonacciHeapTest, POP_LARGE) {
     ASSERT_TRUE(heap.empty());
 }
 
-TEST(FibonacciHeapTest, PUSH_POP_LARGE) {
+TEST(FibonacciHeapTest, PushPopLarge) {
     FibonacciHeap<int> heap;
     priority_queue<int, vector<int>, greater<int>> pq;
 
