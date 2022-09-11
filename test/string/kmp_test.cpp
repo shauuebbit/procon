@@ -13,7 +13,10 @@ TEST(KMPTest, SmallSearch) {
         for (int r = l + 1; r <= target.size(); r++) {
             const string pattern = target.substr(l, r - l);
 
-            ASSERT_GE(search(target, pattern), 0);
+            int pos = search(target, pattern);
+            ASSERT_GE(pos, 0);
+            ASSERT_LE(pos, l);
+            ASSERT_EQ(search(target, pattern + "d"), -1);
         }
     }
 
