@@ -2,69 +2,68 @@
 
 #include <cstddef>
 
-template <typename T>
+template <typename K>
 class AVLTree {
    private:
     struct Node {
-        T value;
+        K key;
         int height;
         int sub_size;
         Node* parent;
         Node* left_child;
         Node* right_child;
 
-        Node(T value) : value(value), height(0), sub_size(1), parent(nullptr), left_child(nullptr), right_child(nullptr) {}
+        Node(K key) : key(key), height(0), sub_size(1), parent(nullptr), left_child(nullptr), right_child(nullptr) {}
     };
 
     Node* base;
 
     size_t sz;
 
-    Node* createNode(T d, Node* parent) {
-        Node* ret = new Node(d);
+    Node* create_node(K key, Node* parent) {
+        Node* ret = new Node(key);
         ret->parent = parent;
         ret->left_child = base;
         ret->right_child = base;
         return ret;
     }
 
-    int getHeight(Node* v) { return (v->left_child->height < v->right_child->height ? v->right_child->height : v->left_child->height) + 1; }
-    int bias(Node* v) { return v->left_child->height - v->right_child->height; }
+    inline int get_height(Node* v) const { return (v->left_child->height < v->right_child->height ? v->right_child->height : v->left_child->height) + 1; }
+    inline int bias(Node* v) const { return v->left_child->height - v->right_child->height; }
 
-    void reviseNode(Node* v) {
-        v->height = getHeight(v);
+    void revise_node(Node* v) {
+        v->height = get_height(v);
         v->sub_size = v->left_child->sub_size + v->right_child->sub_size + 1;
     }
 
-    Node* minNode(Node* v) {
+    Node* min_node(Node* v) const {
         while (v->left_child != base) v = v->left_child;
         return v;
     }
 
-    Node* maxNode(Node* v) {
+    Node* max_node(Node* v) const {
         while (v->right_child != base) v = v->right_child;
         return v;
     }
 
-    Node* findNode(T d) {
+    Node* find_node_by_key(K key) const {
         Node* current = base->right_child;
-        for (; current != base; current = (d < current->value ? current->left_child : current->right_child))
-            if (d == current->value) return current;
+        for (; current != base; current = (key < current->key ? current->left_child : current->right_child))
+            if (key == current->key) return current;
         return base;
     }
 
-    Node* findNodeByOrder(size_t ord) {
-        // In fact ord >= 0
-        if (ord < 0 || ord >= sz) return base;
+    Node* find_kth_node(size_t k) const {
+        if (k >= sz) return base;
 
         Node* current = base->right_child;
         while (current != base) {
-            if (current->left_child->sub_size == ord)
+            if (current->left_child->sub_size == k)
                 return current;
-            else if (current->left_child->sub_size > ord)
+            else if (current->left_child->sub_size > k)
                 current = current->left_child;
             else {
-                ord -= current->left_child->sub_size + 1;
+                k -= current->left_child->sub_size + 1;
                 current = current->right_child;
             }
         }
@@ -72,7 +71,7 @@ class AVLTree {
         return base;
     }
 
-    Node* rotateLeft(Node* v) {
+    Node* rotate_left(Node* v) {
         Node* right = v->right_child;
 
         v->right_child = right->left_child;
@@ -82,12 +81,12 @@ class AVLTree {
         right->left_child = v;
         v->parent = right;
 
-        reviseNode(v);
-        reviseNode(right);
+        revise_node(v);
+        revise_node(right);
         return right;
     }
 
-    Node* rotateRight(Node* v) {
+    Node* rotate_right(Node* v) {
         Node* left = v->left_child;
 
         v->left_child = left->right_child;
@@ -97,21 +96,21 @@ class AVLTree {
         left->right_child = v;
         v->parent = left;
 
-        reviseNode(v);
-        reviseNode(left);
+        revise_node(v);
+        revise_node(left);
         return left;
     }
 
     void balance(Node* v) {
         while (v != base) {
             if (bias(v) == 2) {
-                if (bias(v->left_child) == -1) rotateLeft(v->left_child);
-                v = rotateRight(v);
+                if (bias(v->left_child) == -1) rotate_left(v->left_child);
+                v = rotate_right(v);
             } else if (bias(v) == -2) {
-                if (bias(v->right_child) == 1) rotateRight(v->right_child);
-                v = rotateLeft(v);
+                if (bias(v->right_child) == 1) rotate_right(v->right_child);
+                v = rotate_left(v);
             } else
-                reviseNode(v);
+                revise_node(v);
 
             v = v->parent;
         }
@@ -127,43 +126,43 @@ class AVLTree {
         base->right_child = base;
     }
 
-    bool insert(T d) {
+    bool insert(K key) {
         Node *current = base->right_child, *parent = base;
 
-        for (; current != base; parent = current, current = (d < current->value ? current->left_child : current->right_child))
-            if (d == current->value) return false;
+        for (; current != base; parent = current, current = (key < current->key ? current->left_child : current->right_child))
+            if (key == current->key) return false;
 
-        if (size() && d < parent->value)
-            parent->left_child = createNode(d, parent);
+        if (size() && key < parent->key)
+            parent->left_child = create_node(key, parent);
         else
-            parent->right_child = createNode(d, parent);
+            parent->right_child = create_node(key, parent);
 
         balance(parent);
         ++sz;
         return true;
     }
 
-    bool erase(T d) {
+    bool erase(K key) {
         Node* current = base->right_child;
 
-        for (; current != base; current = (d < current->value ? current->left_child : current->right_child)) {
-            if (d == current->value) {
-                Node* changedNode = nullptr;
+        for (; current != base; current = (key < current->key ? current->left_child : current->right_child)) {
+            if (key == current->key) {
+                Node* changed_node = nullptr;
                 if (current->right_child == base) {
                     (current->parent->right_child == current ? current->parent->right_child : current->parent->left_child) = current->left_child;
                     current->left_child->parent = current->parent;
-                    changedNode = current->parent;
+                    changed_node = current->parent;
                     delete current;
                 } else {
-                    Node* right_min = minNode(current->right_child);
-                    current->value = right_min->value;
+                    Node* right_min = min_node(current->right_child);
+                    current->key = right_min->key;
                     (right_min->parent == current ? current->right_child : right_min->parent->left_child) = right_min->right_child;
                     right_min->right_child->parent = right_min->parent;
-                    changedNode = right_min->parent;
+                    changed_node = right_min->parent;
                     delete right_min;
                 }
 
-                balance(changedNode);
+                balance(changed_node);
                 --sz;
                 return true;
             }
@@ -171,14 +170,14 @@ class AVLTree {
         return false;
     }
 
-    bool empty() { return base->right_child == base; }
-    size_t size() { return sz; }
+    inline bool empty() const { return base->right_child == base; }
+    inline size_t size() const { return sz; }
 
-    T getMin() { return minNode(base->right_child)->value; }
-    T getMax() { return maxNode(base->right_child)->value; }
-    bool contains(T d) { return findNode(d) != base; }
+    inline K get_min() const { return min_node(base->right_child)->value; }
+    inline K get_max() const { return max_node(base->right_child)->value; }
+    inline bool contains(K key) const { return find_node_by_key(key) != base; }
 
-    T get(size_t ord) { return findNodeByOrder(ord)->value; }
+    inline K get_kth_element(size_t k) const { return find_kth_node(k)->key; }
 
     void clear() {
         Node* current = base->right_child;

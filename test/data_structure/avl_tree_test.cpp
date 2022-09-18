@@ -32,7 +32,7 @@ TEST(AVLTreeTest, LinearInsert2) {
     ASSERT_EQ(tree.size(), n);
 }
 
-TEST(AVLTreeTest, LinearERASE1) {
+TEST(AVLTreeTest, LinearErase1) {
     AVLTree<int> tree;
 
     int n = 300000;
@@ -50,7 +50,7 @@ TEST(AVLTreeTest, LinearERASE1) {
     ASSERT_TRUE(tree.empty());
 }
 
-TEST(AVLTreeTest, LinearERASE2) {
+TEST(AVLTreeTest, LinearErase2) {
     AVLTree<int> tree;
 
     int n = 300000;
@@ -68,7 +68,7 @@ TEST(AVLTreeTest, LinearERASE2) {
     ASSERT_TRUE(tree.empty());
 }
 
-TEST(AVLTreeTest, LinearERASE3) {
+TEST(AVLTreeTest, LinearErase3) {
     AVLTree<int> tree;
 
     int n = 300000;
@@ -86,7 +86,7 @@ TEST(AVLTreeTest, LinearERASE3) {
     ASSERT_TRUE(tree.empty());
 }
 
-TEST(AVLTreeTest, LinearERASE4) {
+TEST(AVLTreeTest, LinearErase4) {
     AVLTree<int> tree;
 
     int n = 300000;
@@ -149,7 +149,7 @@ TEST(AVLTreeTest, InsertAndErase) {
     ASSERT_TRUE(tree.empty());
 }
 
-TEST(AVLTreeTest, GET) {
+TEST(AVLTreeTest, GetKthKey) {
     AVLTree<int> tree;
 
     multiset<int> s;
@@ -179,7 +179,7 @@ TEST(AVLTreeTest, GET) {
 
         size_t ord = 0;
         for (auto e : s) {
-            ASSERT_EQ(tree.get(ord++), e);
+            ASSERT_EQ(tree.get_kth_element(ord++), e);
         }
     }
 
@@ -189,12 +189,12 @@ TEST(AVLTreeTest, GET) {
 
         size_t ord = 0;
         for (auto e : s) {
-            ASSERT_EQ(tree.get(ord++), e);
+            ASSERT_EQ(tree.get_kth_element(ord++), e);
         }
     }
 }
 
-TEST(AVLTreeTest, CLEAR) {
+TEST(AVLTreeTest, Clear) {
     AVLTree<int> tree;
 
     int n = 300000;
