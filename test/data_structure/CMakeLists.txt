@@ -14,6 +14,10 @@ add_executable(LazySegmentTreeTest lazy_segment_tree_test.cpp)
 target_link_libraries(LazySegmentTreeTest gtest_main)
 gtest_discover_tests(LazySegmentTreeTest)
 
+add_executable(PartialRetroactivePriorityQueueTest partial_retroactive_priority_queue_test.cpp)
+target_link_libraries(PartialRetroactivePriorityQueueTest gtest_main)
+gtest_discover_tests(PartialRetroactivePriorityQueueTest)
+
 add_executable(SegmentTreeTest segment_tree_test.cpp)
 target_link_libraries(SegmentTreeTest gtest_main)
 gtest_discover_tests(SegmentTreeTest)
