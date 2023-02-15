@@ -172,9 +172,7 @@ class SplayTree {
         return node;
     }
 
-    Node* get_kth_node(size_t index) {
-        Node* node = root;
-
+    Node* get_kth_node(Node* node, size_t index) {
         propagate(node);
 
         while (true) {
@@ -270,6 +268,7 @@ class SplayTree {
     }
 
     Node* split_left(const K& key) {
+        // (-\infty, key), [key, \infty)
         Node* node = lower_bound(root, key);
 
         Node* left = nullptr;
@@ -289,6 +288,7 @@ class SplayTree {
     }
 
     Node* split_right(const K& key) {
+        // (-\infty, key], (key, \infty)
         Node* right = upper_bound(root, key);
 
         if (right) {
@@ -422,6 +422,8 @@ class SplayTree {
         return ret;
     }
 
+    V fold() const { return root ? root->acc : e; }
+
     size_t get_index(const K& key) {
         assert(contains(key));
         if (root->left_child)
@@ -432,10 +434,8 @@ class SplayTree {
 
     K get_kth_key(size_t index) {
         assert(index < size());
-        return get_kth_node(index)->key;
+        return get_kth_node(root, index)->key;
     }
-
-    V fold() const { return root ? root->acc : e; }
 
     size_t size() const { return root ? root->subtree_size : 0; }
 
