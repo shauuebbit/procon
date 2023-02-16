@@ -8,52 +8,47 @@ template <typename T>
 class Compressor {
    private:
     bool compressed;
-    std::map<T, int> zip;
-    std::vector<T> unzip;
+    std::vector<T> data;
 
    public:
     Compressor() : compressed(false) {}
 
-    Compressor(const std::vector<T>& org) : unzip(org), compressed(false) {
+    Compressor(const std::vector<T>& data) : data(data), compressed(false) {
         compressed = build();
     }
 
     bool add(T x) {
         if (compressed) return false;
-        unzip.push_back(x);
+        data.push_back(x);
         return true;
     }
 
     bool build() {
         if (compressed) return false;
 
-        std::sort(unzip.begin(), unzip.end());
-        unzip.erase(std::unique(unzip.begin(), unzip.end()), unzip.end());
-
-        for (int i = 0; i < (int)unzip.size(); i++) {
-            zip[unzip[i]] = i;
-        }
+        std::sort(data.begin(), data.end());
+        data.erase(std::unique(data.begin(), data.end()), data.end());
 
         compressed = true;
 
         return true;
     }
 
-    T compress(const T& x) {
+    int compress(const T& x) {
         if (!compressed) build();
 
-        return zip[x];
+        return static_cast<int>(std::upper_bound(data.begin(), data.end(), x) - data.begin()) - 1;
     }
 
-    int uncompress(int ord) {
+    T uncompress(int index) {
         if (!compressed) build();
 
-        return unzip[ord];
+        return data[index];
     }
 
     size_t size() {
         if (!compressed) build();
 
-        return unzip.size();
+        return data.size();
     }
 };
