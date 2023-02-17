@@ -1,7 +1,6 @@
 #pragma once
 
 #include <algorithm>
-#include <map>
 #include <vector>
 
 template <typename T>
@@ -13,7 +12,7 @@ class Compressor {
    public:
     Compressor() : compressed(false) {}
 
-    Compressor(const std::vector<T>& data) : data(data), compressed(false) {
+    Compressor(const std::vector<T>& data) : data(data) {
         compressed = build();
     }
 
@@ -25,30 +24,23 @@ class Compressor {
 
     bool build() {
         if (compressed) return false;
-
         std::sort(data.begin(), data.end());
         data.erase(std::unique(data.begin(), data.end()), data.end());
-
-        compressed = true;
-
-        return true;
+        return compressed = true;
     }
 
     int compress(const T& x) {
         if (!compressed) build();
-
         return static_cast<int>(std::upper_bound(data.begin(), data.end(), x) - data.begin()) - 1;
     }
 
     T uncompress(int index) {
         if (!compressed) build();
-
         return data[index];
     }
 
     size_t size() {
         if (!compressed) build();
-
         return data.size();
     }
 };
