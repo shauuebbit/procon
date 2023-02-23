@@ -6,6 +6,10 @@ add_executable(BinaryIndexedTreeTest binary_indexed_tree_test.cpp)
 target_link_libraries(BinaryIndexedTreeTest gtest_main)
 gtest_discover_tests(BinaryIndexedTreeTest)
 
+add_executable(ConvexHullTrickTest convex_hull_trick_test.cpp)
+target_link_libraries(ConvexHullTrickTest gtest_main)
+gtest_discover_tests(ConvexHullTrickTest)
+
 add_executable(FibonacciHeapTest fibonacci_heap_test.cpp)
 target_link_libraries(FibonacciHeapTest gtest_main)
 gtest_discover_tests(FibonacciHeapTest)
