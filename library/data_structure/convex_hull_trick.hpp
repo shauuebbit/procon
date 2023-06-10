@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cassert>
+#include <limits>
 #include <set>
 
 template <typename T, typename Compare = std::less<T>>
