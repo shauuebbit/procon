@@ -10,9 +10,9 @@ add_executable(ConvexHullTrickTest convex_hull_trick_test.cpp)
 target_link_libraries(ConvexHullTrickTest gtest_main)
 gtest_discover_tests(ConvexHullTrickTest)
 
-add_executable(DisjointSparseTable disjoint_sparse_table_test.cpp)
-target_link_libraries(DisjointSparseTable gtest_main)
-gtest_discover_tests(DisjointSparseTable)
+add_executable(DisjointSparseTableTest disjoint_sparse_table_test.cpp)
+target_link_libraries(DisjointSparseTableTest gtest_main)
+gtest_discover_tests(DisjointSparseTableTest)
 
 add_executable(FibonacciHeapTest fibonacci_heap_test.cpp)
 target_link_libraries(FibonacciHeapTest gtest_main)
