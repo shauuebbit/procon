@@ -1,29 +1,24 @@
 #pragma once
 
-#include <algorithm>
+#include <vector>
 
 class UnionFind {
    private:
-    int sz;
-    int* data;
+    size_t sz;
+    std::vector<int> data;
 
    public:
-    UnionFind(int n = 0) : sz(n) {
-        data = new int[n];
-        for (int i = 0; i < n; i++) data[i] = -1;
-    }
+    UnionFind(size_t n = 0) : data(n, -1), sz(n) {}
 
-    int find(int x) {
-        return data[x] < 0 ? x : data[x] = find(data[x]);
-    }
+    int find(int x) { return data[x] < 0 ? x : data[x] = find(data[x]); }
 
     bool unite(int x, int y) {
         x = find(x);
         y = find(y);
 
-        if (x == y)
+        if (x == y) {
             return false;
-        else {
+        } else {
             if (data[x] > data[y]) std::swap(x, y);
             data[x] += data[y];
             data[y] = x;
@@ -32,19 +27,11 @@ class UnionFind {
         }
     }
 
-    bool is_same(int x, int y) {
-        return find(x) == find(y);
+    bool is_same(int x, int y) { return find(x) == find(y); }
+
+    size_t size(int x) {
+        return static_cast<size_t>(-data[find(x)]);
     }
 
-    int size(int x) {
-        return -data[find(x)];
-    }
-
-    int size() {
-        return sz;
-    }
-
-    ~UnionFind() {
-        delete[] data;
-    }
+    size_t size() { return sz; }
 };
