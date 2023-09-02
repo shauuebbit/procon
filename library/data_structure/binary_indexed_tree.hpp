@@ -9,7 +9,7 @@ class BinaryIndexedTree {
     std::vector<T> data;
 
    public:
-    BinaryIndexedTree(int sz = 0) : data(sz + 1, 0) {}
+    BinaryIndexedTree(size_t sz = 0) : data(sz + 1, 0) {}
 
     bool add(size_t index, T x = 1) {
         if (data.size() <= index + 1) return false;
