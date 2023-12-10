@@ -3,6 +3,9 @@ project(procon)
 
 set(CMAKE_CXX_STANDARD 20)
 
+add_compile_options(-fsplit-stack)
+add_compile_options(-Wall -Wextra)
+
 include_directories(library)
 
 include(CTest)

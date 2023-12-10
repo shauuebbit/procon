@@ -2,21 +2,30 @@
 
 template <typename T>
 struct Point {
-  T x; T y;
+    T x;
+    T y;
 
-  Point(const Point<T>& p) : x(p.x), y(p.y) {}
-  Point(T x, T y) : x(x), y(y) {}
-  Point() : x(0), y(0) {}
+    Point(const Point<T>& p) : x(p.x), y(p.y) {}
+    Point(T x, T y) : x(x), y(y) {}
+    Point() : x(0), y(0) {}
 
-  Point<T>& operator+=(const Point<T>& p) {
-    x += p.x; y += p.y;
-    return *this;
-  }
+    constexpr Point<T>& operator=(const Point<T>& p) & {
+        x = p.x;
+        y = p.y;
+        return *this;
+    }
 
-  Point<T>& operator-=(const Point<T>& p) {
-    x -= p.x; y -= p.y;
-    return *this;
-  }
+    constexpr Point<T>& operator+=(const Point<T>& p) {
+        x += p.x;
+        y += p.y;
+        return *this;
+    }
+
+    constexpr Point<T>& operator-=(const Point<T>& p) {
+        x -= p.x;
+        y -= p.y;
+        return *this;
+    }
 };
 
 template <typename T>

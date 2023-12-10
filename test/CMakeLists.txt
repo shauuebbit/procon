@@ -4,6 +4,7 @@ project(procon_library_test)
 set(CMAKE_CXX_STANDARD 20)
 
 add_compile_options(-fsplit-stack)
+add_compile_options(-Wall -Wextra)
 
 include(FetchContent)
 FetchContent_Declare(

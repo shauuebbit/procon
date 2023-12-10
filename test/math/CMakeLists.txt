@@ -6,9 +6,9 @@ add_executable(FastFourierTransformTest fast_fourier_transform_test.cpp)
 target_link_libraries(FastFourierTransformTest gtest_main)
 gtest_discover_tests(FastFourierTransformTest)
 
-add_executable(GCDTest gcd_test.cpp)
-target_link_libraries(GCDTest gtest_main)
-gtest_discover_tests(GCDTest)
+add_executable(GCDLCMTest gcd_lcm_test.cpp)
+target_link_libraries(GCDLCMTest gtest_main)
+gtest_discover_tests(GCDLCMTest)
 
 add_executable(InverseTest inverse_test.cpp)
 target_link_libraries(InverseTest gtest_main)

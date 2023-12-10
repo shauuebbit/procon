@@ -8,10 +8,10 @@ TEST(ManacherTest, Small1) {
     for (const string& s : {"aabacabbaaababbabaabbbbaba", "d", "abababababab", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}) {
         auto res = manacher(s);
 
-        for (int i = 0; i < s.size(); i++) {
+        for (int i = 0; i < (int)s.size(); i++) {
             int r = 0;
 
-            while (i - r >= 0 && i + r < s.size() && s[i - r] == s[i + r]) ++r;
+            while (i - r >= 0 && i + r < (int)s.size() && s[i - r] == s[i + r]) ++r;
             ASSERT_EQ(res[i], r);
         }
     }
@@ -22,10 +22,10 @@ TEST(KMPTest, Small2) {
 
     auto res = manacher(s);
 
-    for (int i = 0; i < s.size(); i++) {
+    for (int i = 0; i < (int)s.size(); i++) {
         int r = 0;
 
-        while (i - r >= 0 && i + r < s.size() && s[i - r] == s[i + r]) ++r;
+        while (i - r >= 0 && i + r < (int)s.size() && s[i - r] == s[i + r]) ++r;
         ASSERT_EQ(res[i], r);
     }
 }

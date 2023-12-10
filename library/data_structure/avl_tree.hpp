@@ -8,7 +8,7 @@ class AVLTree {
     struct Node {
         K key;
         int height;
-        int sub_size;
+        size_t sub_size;
         Node* parent;
         Node* left_child;
         Node* right_child;
