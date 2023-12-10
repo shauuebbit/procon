@@ -20,7 +20,7 @@ TEST(KMPTest, SmallSearch1) {
         }
     }
 
-    for (const string& pattern : {"d", "abababababab", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}) {
+    for (const string pattern : {"d", "abababababab", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}) {
         ASSERT_EQ(search(target, pattern), -1);
     }
 }

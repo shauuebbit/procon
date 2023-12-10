@@ -9,7 +9,7 @@ long long hilbert_order(size_t x, size_t y, size_t k) {
     if (k == 0) return 0;
 
     --k;
-    size_t m = (size_t)1 << k;
+    size_t m = 1uz << k;
 
     size_t fx = (x & m) >> k, fy = (y & m) >> k;
 
@@ -44,7 +44,7 @@ class Mo {
         std::iota(indices.begin(), indices.end(), 0);
 
         size_t k = 0;
-        while (((size_t)1 << k) < n) ++k;
+        while ((1uz << k) < n) ++k;
 
         std::vector<long long> ord(queries.size());
 

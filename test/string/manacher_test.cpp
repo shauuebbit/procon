@@ -5,7 +5,7 @@
 using namespace std;
 
 TEST(ManacherTest, Small1) {
-    for (const string& s : {"aabacabbaaababbabaabbbbaba", "d", "abababababab", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}) {
+    for (const string s : {"aabacabbaaababbabaabbbbaba", "d", "abababababab", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}) {
         auto res = manacher(s);
 
         for (int i = 0; i < (int)s.size(); i++) {
