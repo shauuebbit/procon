@@ -10,11 +10,9 @@
 using namespace std;
 
 TEST(SplayTreeTest, LinearInsert1) {
-    auto op = [](int x, int y) { return 0; };
-
-    auto act = [](int x, int f) { return 0; };
-
-    auto cp = [](int f, int g) { return 0; };
+    auto op = [](int, int) { return 0; };
+    auto act = [](int, int) { return 0; };
+    auto cp = [](int, int) { return 0; };
 
     SplayTree<int, int, int, decltype(op), decltype(act), decltype(cp)> tree(op, act, cp, 0, 0);
 
@@ -29,11 +27,9 @@ TEST(SplayTreeTest, LinearInsert1) {
 }
 
 TEST(SplayTreeTest, LinearInsert2) {
-    auto op = [](int x, int y) { return 0; };
-
-    auto act = [](int x, int f) { return 0; };
-
-    auto cp = [](int f, int g) { return 0; };
+    auto op = [](int, int) { return 0; };
+    auto act = [](int, int) { return 0; };
+    auto cp = [](int, int) { return 0; };
 
     SplayTree<int, int, int, decltype(op), decltype(act), decltype(cp)> tree(op, act, cp, 0, 0);
 
@@ -48,11 +44,9 @@ TEST(SplayTreeTest, LinearInsert2) {
 }
 
 TEST(SplayTreeTest, LinearErase1) {
-    auto op = [](int x, int y) { return 0; };
-
-    auto act = [](int x, int f) { return 0; };
-
-    auto cp = [](int f, int g) { return 0; };
+    auto op = [](int, int) { return 0; };
+    auto act = [](int, int) { return 0; };
+    auto cp = [](int, int) { return 0; };
 
     SplayTree<int, int, int, decltype(op), decltype(act), decltype(cp)> tree(op, act, cp, 0, 0);
 
@@ -72,11 +66,9 @@ TEST(SplayTreeTest, LinearErase1) {
 }
 
 TEST(SplayTreeTest, LinearErase2) {
-    auto op = [](int x, int y) { return 0; };
-
-    auto act = [](int x, int f) { return 0; };
-
-    auto cp = [](int f, int g) { return 0; };
+    auto op = [](int, int) { return 0; };
+    auto act = [](int, int) { return 0; };
+    auto cp = [](int, int) { return 0; };
 
     SplayTree<int, int, int, decltype(op), decltype(act), decltype(cp)> tree(op, act, cp, 0, 0);
 
@@ -96,11 +88,9 @@ TEST(SplayTreeTest, LinearErase2) {
 }
 
 TEST(SplayTreeTest, LinearErase3) {
-    auto op = [](int x, int y) { return 0; };
-
-    auto act = [](int x, int f) { return 0; };
-
-    auto cp = [](int f, int g) { return 0; };
+    auto op = [](int, int) { return 0; };
+    auto act = [](int, int) { return 0; };
+    auto cp = [](int, int) { return 0; };
 
     SplayTree<int, int, int, decltype(op), decltype(act), decltype(cp)> tree(op, act, cp, 0, 0);
 
@@ -120,11 +110,9 @@ TEST(SplayTreeTest, LinearErase3) {
 }
 
 TEST(SplayTreeTest, LinearErase4) {
-    auto op = [](int x, int y) { return 0; };
-
-    auto act = [](int x, int f) { return 0; };
-
-    auto cp = [](int f, int g) { return 0; };
+    auto op = [](int, int) { return 0; };
+    auto act = [](int, int) { return 0; };
+    auto cp = [](int, int) { return 0; };
 
     SplayTree<int, int, int, decltype(op), decltype(act), decltype(cp)> tree(op, act, cp, 0, 0);
 
@@ -144,11 +132,9 @@ TEST(SplayTreeTest, LinearErase4) {
 }
 
 TEST(SplayTreeTest, InsertAndErase) {
-    auto op = [](int x, int y) { return 0; };
-
-    auto act = [](int x, int f) { return 0; };
-
-    auto cp = [](int f, int g) { return 0; };
+    auto op = [](int, int) { return 0; };
+    auto act = [](int, int) { return 0; };
+    auto cp = [](int, int) { return 0; };
 
     SplayTree<int, int, int, decltype(op), decltype(act), decltype(cp)> tree(op, act, cp, 0, 0);
 
@@ -195,11 +181,9 @@ TEST(SplayTreeTest, InsertAndErase) {
 }
 
 TEST(SplayTreeTest, GetKthKey) {
-    auto op = [](int x, int y) { return 0; };
-
-    auto act = [](int x, int f) { return 0; };
-
-    auto cp = [](int f, int g) { return 0; };
+    auto op = [](int, int) { return 0; };
+    auto act = [](int, int) { return 0; };
+    auto cp = [](int, int) { return 0; };
 
     SplayTree<int, int, int, decltype(op), decltype(act), decltype(cp)> tree(op, act, cp, 0, 0);
 
@@ -246,11 +230,9 @@ TEST(SplayTreeTest, GetKthKey) {
 }
 
 TEST(SplayTreeTest, Clear) {
-    auto op = [](int x, int y) { return 0; };
-
-    auto act = [](int x, int f) { return 0; };
-
-    auto cp = [](int f, int g) { return 0; };
+    auto op = [](int, int) { return 0; };
+    auto act = [](int, int) { return 0; };
+    auto cp = [](int, int) { return 0; };
 
     SplayTree<int, int, int, decltype(op), decltype(act), decltype(cp)> tree(op, act, cp, 0, 0);
 

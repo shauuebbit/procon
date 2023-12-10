@@ -12,7 +12,7 @@ class Compressor {
    public:
     Compressor() : compressed(false) {}
 
-    Compressor(const std::vector<T>& data) : data(data), compressed(false) {
+    Compressor(const std::vector<T>& data) : compressed(false), data(data) {
         compressed = build();
     }
 

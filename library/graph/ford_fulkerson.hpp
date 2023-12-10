@@ -27,7 +27,7 @@ class FordFulkerson {
         int t = 0;
 
         std::vector<int> used(graph.size(), -1);
-        auto dfs = [&](auto this_function, int node, T current_flow) {
+        auto dfs = [&](auto&& this_function, int node, T current_flow) {
             if (node == dst) return current_flow;
 
             used[node] = t;
@@ -49,7 +49,7 @@ class FordFulkerson {
 
         T flow(0);
 
-        for (T f; f = dfs(dfs, src, std::numeric_limits<T>::max()); ++t) {
+        for (T f; (f = dfs(dfs, src, std::numeric_limits<T>::max())); ++t) {
             flow += f;
         }
 

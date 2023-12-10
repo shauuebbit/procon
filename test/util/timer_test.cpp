@@ -17,23 +17,23 @@ TEST(TimerTest, Construct) {
                 for (int l = 0; l < 2; l++) {
                     sum += (i + 1) * (j + 1) + k * l;
                 }
-                auto elapsed = timer.elapse_as_nanoseconds();
+                auto elapsed = timer.elapse_in_nanoseconds();
                 ASSERT_GE(elapsed, 0);
-                auto stopped = timer.stop_as_nanoseconds();
+                auto stopped = timer.stop_in_nanoseconds();
                 ASSERT_GE(stopped, elapsed);
             }
-            auto elapsed = timer.elapse_as_microseconds();
+            auto elapsed = timer.elapse_in_microseconds();
             ASSERT_GE(elapsed, 0);
-            auto stopped = timer.stop_as_microseconds();
+            auto stopped = timer.stop_in_microseconds();
             ASSERT_GE(stopped, elapsed);
         }
-        auto elapsed = timer.elapse_as_milliseconds();
+        auto elapsed = timer.elapse_in_milliseconds();
         ASSERT_GE(elapsed, 0);
-        auto stopped = timer.stop_as_milliseconds();
+        auto stopped = timer.stop_in_milliseconds();
         ASSERT_GE(stopped, elapsed);
     }
-    auto elapsed = timer.elapse_as_seconds();
+    auto elapsed = timer.elapse_in_seconds();
     ASSERT_GE(elapsed, 0);
-    auto stopped = timer.stop_as_seconds();
+    auto stopped = timer.stop_in_seconds();
     ASSERT_GE(stopped, elapsed);
 }

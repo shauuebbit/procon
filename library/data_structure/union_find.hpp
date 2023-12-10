@@ -8,7 +8,7 @@ class UnionFind {
     std::vector<int> data;
 
    public:
-    UnionFind(size_t n = 0) : data(n, -1), sz(n) {}
+    UnionFind(size_t n = 0) : sz(n), data(n, -1) {}
 
     int find(int x) { return data[x] < 0 ? x : data[x] = find(data[x]); }
 
