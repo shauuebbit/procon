@@ -155,6 +155,17 @@ TEST(ModIntTest, Pow) {
     }
 }
 
+TEST(ModIntTest, Equal) {
+    mint a(10);
+    mint b(10);
+    mint c(1000);
+
+    ASSERT_EQ(a, b);
+    ASSERT_EQ(a, 10);
+    ASSERT_NE(b, c);
+    ASSERT_NE(c, a);
+}
+
 TEST(ModIntTest, Assign) {
     mint a(10);
     mint b(1000);
