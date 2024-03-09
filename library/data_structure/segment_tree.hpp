@@ -26,7 +26,7 @@ class SegmentTree {
         }
     }
 
-    bool update(size_t index, const M& x) {
+    bool set(size_t index, const M& x) {
         if (index >= sz) return false;
         index += sz;
         data[index] = x;
@@ -37,6 +37,8 @@ class SegmentTree {
 
         return true;
     }
+
+    M get(size_t index) { return fold(index, index + 1); }
 
     M fold(size_t left, size_t right) {
         if (right > sz) right = sz;
