@@ -12,9 +12,9 @@ class SegmentTree {
     size_t sz;
 
    public:
-    SegmentTree(size_t sz, const F& op, const M& e) : data(sz << 1, e), op(op), e(e), sz(sz) {}
+    constexpr SegmentTree(size_t sz, const F& op, const M& e) : data(sz << 1, e), op(op), e(e), sz(sz) {}
 
-    SegmentTree(const std::vector<M>& v, const F& op, const M& e) : data(v.size() << 1, e), op(op), e(e), sz(v.size()) {
+    constexpr SegmentTree(const std::vector<M>& v, const F& op, const M& e) : data(v.size() << 1, e), op(op), e(e), sz(v.size()) {
         for (size_t i = 0; i < sz; i++) {
             data[i + sz] = v[i];
         }
@@ -26,7 +26,7 @@ class SegmentTree {
         }
     }
 
-    bool set(size_t index, const M& x) {
+    constexpr bool set(size_t index, const M& x) {
         if (index >= sz) return false;
         index += sz;
         data[index] = x;
@@ -38,9 +38,9 @@ class SegmentTree {
         return true;
     }
 
-    M get(size_t index) { return fold(index, index + 1); }
+    constexpr M get(size_t index) const { return data[index + sz]; }
 
-    M fold(size_t left, size_t right) {
+    constexpr M fold(size_t left, size_t right) const {
         if (right > sz) right = sz;
         M l = e, r = e;
 
@@ -52,5 +52,5 @@ class SegmentTree {
         return op(l, r);
     }
 
-    M fold() { return fold(0, sz); }
+    constexpr M fold() const { return fold(0, sz); }
 };
