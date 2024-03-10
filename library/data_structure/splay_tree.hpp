@@ -383,20 +383,20 @@ class SplayTree {
         }
     }
 
-    bool update(const K& key, const V& value) {
-        if (!contains(key)) return false;
+    void set(const K& key, const V& value) {
+        if (!contains(key)) {
+            insert(key, value);
+        } else {
+            assert(root->lazy == id);
 
-        assert(root->lazy == id);
+            root->value = value;
+            root->acc = value;
+            root->lazy = id;
 
-        root->value = value;
-        root->acc = value;
-        root->lazy = id;
-
-        propagate(root->left_child);
-        propagate(root->right_child);
-        recalc(root);
-
-        return true;
+            propagate(root->left_child);
+            propagate(root->right_child);
+            recalc(root);
+        }
     }
 
     void update(const K& left_key, const K& right_key, const E& g) {
