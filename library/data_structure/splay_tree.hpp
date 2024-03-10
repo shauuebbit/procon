@@ -11,12 +11,12 @@ class SplayTree {
         V value;
         V acc;
         E lazy;
-        size_t subtree_size;
-        Node* left_child;
-        Node* right_child;
-        Node* parent;
+        mutable size_t subtree_size;
+        mutable Node* left_child;
+        mutable Node* right_child;
+        mutable Node* parent;
 
-        Node(const K& key, const V& value) : key(key), value(value), subtree_size(1), left_child(nullptr), right_child(nullptr), parent(nullptr) {}
+        constexpr Node(const K& key, const V& value) : key(key), value(value), subtree_size(1), left_child(nullptr), right_child(nullptr), parent(nullptr) {}
     };
 
     F op;
@@ -25,15 +25,15 @@ class SplayTree {
     V e;
     E id;
 
-    Node* root;
+    mutable Node* root;
 
-    bool is_left_child(Node* node) {
+    constexpr bool is_left_child(const Node* node) const {
         assert(node->parent);
         assert(node->parent->left_child == node || node->parent->right_child == node);
         return node == node->parent->left_child;
     }
 
-    void rotate_left(Node* node) {
+    constexpr void rotate_left(Node* node) const {
         Node* right = node->right_child;
         assert(right);
         node->right_child = right->left_child;
@@ -49,7 +49,7 @@ class SplayTree {
         node->parent = right;
     }
 
-    void rotate_right(Node* node) {
+    constexpr void rotate_right(Node* node) const {
         Node* left = node->left_child;
         assert(left);
         node->left_child = left->right_child;
@@ -65,7 +65,7 @@ class SplayTree {
         node->parent = left;
     }
 
-    void splay(Node* node) {
+    constexpr void splay(Node* node) const {
         while (node && node->parent) {
             Node* parent = node->parent;
 
@@ -105,7 +105,7 @@ class SplayTree {
         recalc(node);
     }
 
-    void propagate(Node* node) {
+    constexpr void propagate(Node* node) const {
         if (!node || node->lazy == id) return;
         node->value = act(node->value, node->lazy);
         node->acc = act(node->acc, node->lazy);
@@ -118,7 +118,7 @@ class SplayTree {
         node->lazy = id;
     }
 
-    void recalc(Node* node) {
+    constexpr void recalc(Node* node) const {
         if (!node) return;
         node->acc = node->value;
         node->subtree_size = 1;
@@ -134,7 +134,7 @@ class SplayTree {
         }
     }
 
-    Node* get_min_key_node(Node* node) {
+    constexpr Node* get_min_key_node(Node* node) const {
         if (!node) return node;
 
         propagate(node);
@@ -153,7 +153,7 @@ class SplayTree {
         return node;
     }
 
-    Node* get_max_key_node(Node* node) {
+    constexpr Node* get_max_key_node(Node* node) const {
         if (!node) return node;
 
         propagate(node);
@@ -172,7 +172,7 @@ class SplayTree {
         return node;
     }
 
-    Node* get_kth_node(Node* node, size_t index) {
+    constexpr Node* get_kth_node(Node* node, size_t index) const {
         propagate(node);
 
         while (true) {
@@ -203,7 +203,7 @@ class SplayTree {
         return node;
     }
 
-    Node* lower_bound(Node* node, const K& key) {
+    constexpr Node* lower_bound(Node* node, const K& key) const {
         Node* ret = nullptr;
 
         propagate(node);
@@ -235,7 +235,7 @@ class SplayTree {
         return ret;
     }
 
-    Node* upper_bound(Node* node, const K& key) {
+    constexpr Node* upper_bound(Node* node, const K& key) const {
         Node* ret = nullptr;
 
         propagate(node);
@@ -267,7 +267,7 @@ class SplayTree {
         return ret;
     }
 
-    Node* split_left(const K& key) {
+    constexpr Node* split_left(const K& key) const {
         // (-\infty, key), [key, \infty)
         Node* node = lower_bound(root, key);
 
@@ -287,7 +287,7 @@ class SplayTree {
         return left;
     }
 
-    Node* split_right(const K& key) {
+    constexpr Node* split_right(const K& key) const {
         // (-\infty, key], (key, \infty)
         Node* right = upper_bound(root, key);
 
@@ -305,7 +305,7 @@ class SplayTree {
         return right;
     }
 
-    void merge_left(Node* left) {
+    constexpr void merge_left(Node* left) const {
         if (root) {
             root = get_min_key_node(root);
 
@@ -322,7 +322,7 @@ class SplayTree {
         }
     }
 
-    void merge_right(Node* right) {
+    constexpr void merge_right(Node* right) const {
         if (root) {
             root = get_max_key_node(root);
 
@@ -340,9 +340,9 @@ class SplayTree {
     }
 
    public:
-    SplayTree(const F& op, const A& act, const G& cp, const V& e, const E& id) : op(op), act(act), cp(cp), e(e), id(id), root(nullptr) {}
+    constexpr SplayTree(const F& op, const A& act, const G& cp, const V& e, const E& id) : op(op), act(act), cp(cp), e(e), id(id), root(nullptr) {}
 
-    bool insert(const K& key, const V& value) {
+    constexpr bool insert(const K& key, const V& value) {
         if (contains(key)) return false;
 
         Node* right = split_right(key);
@@ -358,7 +358,7 @@ class SplayTree {
         return true;
     }
 
-    bool erase(const K& key) {
+    constexpr bool erase(const K& key) {
         if (!contains(key)) return false;
 
         Node* left = split_left(key);
@@ -373,7 +373,7 @@ class SplayTree {
         return true;
     }
 
-    bool contains(const K& key) {
+    constexpr bool contains(const K& key) const {
         Node* node = lower_bound(root, key);
         if (node && node->key == key) {
             assert(node == root);
@@ -383,23 +383,23 @@ class SplayTree {
         }
     }
 
-    bool update(const K& key, const V& value) {
-        if (!contains(key)) return false;
+    constexpr void set(const K& key, const V& value) {
+        if (!contains(key)) {
+            insert(key, value);
+        } else {
+            assert(root->lazy == id);
 
-        assert(root->lazy == id);
+            root->value = value;
+            root->acc = value;
+            root->lazy = id;
 
-        root->value = value;
-        root->acc = value;
-        root->lazy = id;
-
-        propagate(root->left_child);
-        propagate(root->right_child);
-        recalc(root);
-
-        return true;
+            propagate(root->left_child);
+            propagate(root->right_child);
+            recalc(root);
+        }
     }
 
-    void update(const K& left_key, const K& right_key, const E& g) {
+    constexpr void update(const K& left_key, const K& right_key, const E& g) {
         Node* left = split_left(left_key);
         Node* right = split_right(right_key);
 
@@ -409,7 +409,7 @@ class SplayTree {
         merge_right(right);
     }
 
-    V fold(const K& left_key, const K& right_key) {
+    constexpr V fold(const K& left_key, const K& right_key) const {
         Node* left = split_left(left_key);
         Node* right = split_right(right_key);
 
@@ -422,9 +422,9 @@ class SplayTree {
         return ret;
     }
 
-    V fold() const { return root ? root->acc : e; }
+    constexpr V fold() const { return root ? root->acc : e; }
 
-    size_t get_index(const K& key) {
+    constexpr size_t get_index(const K& key) const {
         assert(contains(key));
         if (root->left_child)
             return root->left_child->subtree_size;
@@ -432,16 +432,16 @@ class SplayTree {
             return 0;
     }
 
-    K get_kth_key(size_t index) {
+    constexpr K get_kth_key(size_t index) const {
         assert(index < size());
         return get_kth_node(root, index)->key;
     }
 
-    size_t size() const { return root ? root->subtree_size : 0; }
+    constexpr size_t size() const { return root ? root->subtree_size : 0; }
 
-    bool empty() const { return !root; }
+    constexpr bool empty() const { return !root; }
 
-    void clear() {
+    constexpr void clear() {
         Node* node = root;
 
         while (node) {
@@ -468,5 +468,5 @@ class SplayTree {
         }
     }
 
-    ~SplayTree() { clear(); }
+    constexpr ~SplayTree() { clear(); }
 };

@@ -308,11 +308,11 @@ TEST(SplayTreeTest, InsertRangeUpdateRangeMinimumQuery) {
         M x = dist_val(engine);
 
         if (contains[i]) {
-            tree.update(i, x);
-            segtree.update(i, x);
+            tree.set(i, x);
+            segtree.set(i, x);
         } else {
             tree.insert(i, x);
-            segtree.update(i, x);
+            segtree.set(i, x);
             contains[i] |= 1;
         }
 
@@ -396,11 +396,11 @@ TEST(SplayTreeTest, InsertEraseRangeUpdateRangeMinimumQuery) {
 
         if (contains[i]) {
             tree.erase(i);
-            segtree.update(i, e);
+            segtree.set(i, e);
             contains[i] ^= 1;
         } else {
             tree.insert(i, x);
-            segtree.update(i, x);
+            segtree.set(i, x);
             contains[i] ^= 1;
         }
 
