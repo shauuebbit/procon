@@ -12,10 +12,10 @@ class LazySegmentTree {
     M e;
     E id;
     size_t sz;
-    std::vector<M> data;
-    std::vector<E> lazy;
+    mutable std::vector<M> data;
+    mutable std::vector<E> lazy;
 
-    void propagate(size_t index) {
+    void propagate(size_t index) const {
         if (lazy[index] == id) return;
         lazy[index << 1] = cp(lazy[index << 1], lazy[index]);
         lazy[(index << 1) | 1] = cp(lazy[(index << 1) | 1], lazy[index]);
@@ -23,20 +23,20 @@ class LazySegmentTree {
         lazy[index] = id;
     }
 
-    void propagate_topdown(size_t index) {
+    void propagate_topdown(size_t index) const {
         size_t h = 0;
         for (size_t i = 1; i < index; i <<= 1) ++h;
         for (size_t i = h; i; --i) propagate(index >> i);
     }
 
-    void recalc(size_t index) {
+    void recalc(size_t index) const {
         while (index >>= 1) data[index] = op(act(data[index << 1], lazy[index << 1]), act(data[(index << 1) | 1], lazy[(index << 1) | 1]));
     }
 
    public:
-    LazySegmentTree(size_t sz, const F& op, const A& act, const G& cp, const M& e, const E& id) : op(op), act(act), cp(cp), e(e), id(id), sz(sz), data(sz << 1, e), lazy(sz << 1, id) {}
+    constexpr LazySegmentTree(size_t sz, const F& op, const A& act, const G& cp, const M& e, const E& id) : op(op), act(act), cp(cp), e(e), id(id), sz(sz), data(sz << 1, e), lazy(sz << 1, id) {}
 
-    LazySegmentTree(const std::vector<M>& v, const F& op, const A& act, const G& cp, const M& e, const E& id) : op(op), act(act), cp(cp), e(e), id(id), sz(v.size()), data(v.size() << 1, e), lazy(v.size() << 1, id) {
+    constexpr LazySegmentTree(const std::vector<M>& v, const F& op, const A& act, const G& cp, const M& e, const E& id) : op(op), act(act), cp(cp), e(e), id(id), sz(v.size()), data(v.size() << 1, e), lazy(v.size() << 1, id) {
         for (size_t i = 0; i < sz; i++) {
             data[i + sz] = v[i];
         }
@@ -46,7 +46,7 @@ class LazySegmentTree {
         }
     }
 
-    bool set(size_t index, const M& x) {
+    constexpr bool set(size_t index, const M& x) {
         if (index >= sz) return false;
 
         index += sz;
@@ -61,9 +61,9 @@ class LazySegmentTree {
         return true;
     }
 
-    void update(const E& g) { update(0, sz, g); }
+    constexpr void update(const E& g) { update(0, sz, g); }
 
-    void update(size_t left, size_t right, const E& g) {
+    constexpr void update(size_t left, size_t right, const E& g) {
         if (left > sz) left = sz;
         if (right > sz) right = sz;
         if (left >= right) return;
@@ -89,9 +89,9 @@ class LazySegmentTree {
         recalc(right - 1);
     }
 
-    M get(size_t index) { return fold(index, index + 1); }
+    constexpr M get(size_t index) const { return fold(index, index + 1); }
 
-    M fold(size_t left, size_t right) {
+    constexpr M fold(size_t left, size_t right) const {
         if (left > sz) left = sz;
         if (right > sz) right = sz;
         if (left >= right) return e;
@@ -118,5 +118,5 @@ class LazySegmentTree {
         return op(l, r);
     }
 
-    M fold() { return fold(0, sz); }
+    constexpr M fold() const { return fold(0, sz); }
 };
