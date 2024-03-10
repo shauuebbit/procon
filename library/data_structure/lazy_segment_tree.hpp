@@ -46,7 +46,7 @@ class LazySegmentTree {
         }
     }
 
-    bool update(size_t index, const M& x) {
+    bool set(size_t index, const M& x) {
         if (index >= sz) return false;
 
         index += sz;
@@ -60,6 +60,8 @@ class LazySegmentTree {
 
         return true;
     }
+
+    void update(const E& g) { update(0, sz, g); }
 
     void update(size_t left, size_t right, const E& g) {
         if (left > sz) left = sz;
@@ -86,6 +88,8 @@ class LazySegmentTree {
         recalc(left);
         recalc(right - 1);
     }
+
+    M get(size_t index) { return fold(index, index + 1); }
 
     M fold(size_t left, size_t right) {
         if (left > sz) left = sz;

@@ -75,6 +75,11 @@ TEST(LazySegmentTreeTest, RangeUpdateRangeMinimumQuery) {
         }
 
         ASSERT_EQ(segtree.fold(l, r), x);
+
+        if (t == q / 1000) {
+            int j = dist_idx(engine);
+            ASSERT_EQ(segtree.get(j), a[j]);
+        }
     }
 }
 
@@ -109,9 +114,9 @@ TEST(LazySegmentTreeTest, RangeAddRangeMinimumQuery) {
     const M e = INF;
     const E id = 0ll;
 
-    LazySegmentTree<M, E, decltype(op), decltype(act), decltype(cp)> segtree(n, op, act, cp, e, id);
+    vector<M> a(n, 0ll);
 
-    vector<M> a(n, e);
+    LazySegmentTree<M, E, decltype(op), decltype(act), decltype(cp)> segtree(a, op, act, cp, e, id);
 
     for (int t = 0; t < q; t++) {
         int l = dist_idx(engine);
@@ -141,6 +146,11 @@ TEST(LazySegmentTreeTest, RangeAddRangeMinimumQuery) {
         }
 
         ASSERT_EQ(segtree.fold(l, r), x);
+
+        if (t == q / 1000) {
+            int j = dist_idx(engine);
+            ASSERT_EQ(segtree.get(j), a[j]);
+        }
     }
 }
 
@@ -175,9 +185,9 @@ TEST(LazySegmentTreeTest, PointUpdateRangeAddRangeMinimumQuery) {
     const M e = INF;
     const E id = 0ll;
 
-    LazySegmentTree<M, E, decltype(op), decltype(act), decltype(cp)> segtree(n, op, act, cp, e, id);
+    vector<M> a(n, 0ll);
 
-    vector<M> a(n, e);
+    LazySegmentTree<M, E, decltype(op), decltype(act), decltype(cp)> segtree(a, op, act, cp, e, id);
 
     for (int t = 0; t < q; t++) {
         int l = dist_idx(engine);
@@ -199,7 +209,7 @@ TEST(LazySegmentTreeTest, PointUpdateRangeAddRangeMinimumQuery) {
 
             M x = dist_val(engine);
             a[i] = x;
-            segtree.update(i, x);
+            segtree.set(i, x);
         }
 
         l = dist_idx(engine);
@@ -215,6 +225,11 @@ TEST(LazySegmentTreeTest, PointUpdateRangeAddRangeMinimumQuery) {
         }
 
         ASSERT_EQ(segtree.fold(l, r), x);
+
+        if (t == q / 1000) {
+            int j = dist_idx(engine);
+            ASSERT_EQ(segtree.get(j), a[j]);
+        }
     }
 }
 
