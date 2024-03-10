@@ -2,48 +2,53 @@
 
 template <typename T>
 struct Point {
-    T x;
-    T y;
+   private:
+    T x_;
+    T y_;
 
-    Point(const Point<T>& p) : x(p.x), y(p.y) {}
-    Point(T x, T y) : x(x), y(y) {}
-    Point() : x(0), y(0) {}
+   public:
+    constexpr Point(const Point<T>& p) : x_(p.x()), y_(p.y()) {}
+    constexpr Point(T x, T y) : x_(x), y_(y) {}
+    constexpr Point() : x_(0), y_(0) {}
+
+    constexpr T x() const { return x_; }
+    constexpr T y() const { return y_; }
 
     constexpr Point<T>& operator=(const Point<T>& p) & {
-        x = p.x;
-        y = p.y;
+        x_ = p.x();
+        y_ = p.y();
         return *this;
     }
 
     constexpr Point<T>& operator+=(const Point<T>& p) {
-        x += p.x;
-        y += p.y;
+        x_ += p.x();
+        y_ += p.y();
         return *this;
     }
 
     constexpr Point<T>& operator-=(const Point<T>& p) {
-        x -= p.x;
-        y -= p.y;
+        x_ -= p.x();
+        y_ -= p.y();
         return *this;
     }
 };
 
 template <typename T>
-Point<T> operator+(const Point<T>& p1, const Point<T>& p2) { return Point<T>(p1) += p2; }
+constexpr Point<T> operator+(const Point<T>& p1, const Point<T>& p2) { return Point<T>(p1) += p2; }
 
 template <typename T>
-Point<T> operator-(const Point<T>& p1, const Point<T>& p2) { return Point<T>(p1) -= p2; }
-
-// lexicographical order
-template <typename T>
-bool operator<(const Point<T>& p1, const Point<T>& p2) { return (p1.x < p2.x) || ((p1.x == p2.x) && (p1.y < p2.y)); }
+constexpr Point<T> operator-(const Point<T>& p1, const Point<T>& p2) { return Point<T>(p1) -= p2; }
 
 // lexicographical order
 template <typename T>
-bool operator>(const Point<T>& p1, const Point<T>& p2) { return (p1.x > p2.x) || ((p1.x == p2.x) && (p1.y > p2.y)); }
+constexpr bool operator<(const Point<T>& p1, const Point<T>& p2) { return (p1.x() < p2.x()) || ((p1.x() == p2.x()) && (p1.y() < p2.y())); }
+
+// lexicographical order
+template <typename T>
+constexpr bool operator>(const Point<T>& p1, const Point<T>& p2) { return (p1.x() > p2.x()) || ((p1.x() == p2.x()) && (p1.y() > p2.y())); }
 
 template <typename T>
-bool operator==(const Point<T>& p1, const Point<T>& p2) { return !(p1 < p2) && !(p1 > p2); }
+constexpr bool operator==(const Point<T>& p1, const Point<T>& p2) { return !(p1 < p2) && !(p1 > p2); }
 
 template <typename T>
-T cross(const Point<T>& p1, const Point<T>& p2) { return p1.x * p2.y - p2.x * p1.y; }
+constexpr T cross(const Point<T>& p1, const Point<T>& p2) { return p1.x() * p2.y() - p2.x() * p1.y(); }
