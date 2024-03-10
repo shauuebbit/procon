@@ -3,22 +3,23 @@
 #include <functional>
 #include <vector>
 
-template <typename M, typename W, typename F = std::function<M(M, M)>, typename G = std::function<M(M, W, int)>, typename H = std::function<M(M, int)>>
+template <typename I, typename M, typename W, typename F = std::function<M(M, M)>, typename G = std::function<M(M, W, I)>, typename H = std::function<M(M, I)>>
 class RerootingDP {
    private:
-    int n;
     F op;
     M e;
     G propagate;
     H apply;
-    std::vector<std::vector<std::pair<W, int>>> graph;
+    std::vector<std::vector<std::pair<W, I>>> graph;
     std::vector<M> dp;
 
-    void bottom_up(int node, int parent) {
+    bool built;
+
+    constexpr void bottom_up(I node, const std::optional<I>& parent) {
         dp[node] = e;
 
         for (auto& [cost, next] : graph[node]) {
-            if (next == parent) continue;
+            if (parent && next == parent.value()) continue;
 
             bottom_up(next, node);
 
@@ -28,54 +29,68 @@ class RerootingDP {
         dp[node] = apply(dp[node], node);
     }
 
-    void top_down(int node, int parent, const M& m) {
+    constexpr void top_down(I node, const std::optional<I>& parent, const M& m) {
         std::vector<M> left(graph[node].size() + 1, e), right(graph[node].size() + 1, e);
 
-        for (int i = 0; i < graph[node].size(); i++) {
+        for (I i = 0; i < (I)graph[node].size(); i++) {
             const auto& [cost, next] = graph[node][i];
 
-            if (next == parent) {
-                left[i + 1] = right[i] = propagate(m, cost, parent);
+            if (parent && next == parent.value()) {
+                left[i + 1] = right[i] = propagate(m, cost, parent.value());
             } else {
                 left[i + 1] = right[i] = propagate(dp[next], cost, next);
             }
         }
 
-        for (int i = 0; i < graph[node].size(); i++) {
+        for (I i = 0; i < (I)graph[node].size(); i++) {
             left[i + 1] = op(left[i], left[i + 1]);
         }
 
-        for (int i = graph[node].size(); i > 0; i--) {
+        for (I i = graph[node].size(); i > 0; i--) {
             right[i - 1] = op(right[i - 1], right[i]);
         }
 
         dp[node] = apply(right[0], node);
 
-        for (int i = 0; i < graph[node].size(); i++) {
+        for (I i = 0; i < (I)graph[node].size(); i++) {
             const auto& [cost, next] = graph[node][i];
 
-            if (next == parent) continue;
+            if (parent && next == parent) continue;
 
             top_down(next, node, apply(op(left[i], right[i + 1]), node));
         }
     }
 
+    constexpr bool run(I root) {
+        if (built) return false;
+
+        bottom_up(root, std::nullopt);
+        top_down(root, std::nullopt, e);
+
+        built = true;
+        return true;
+    }
+
    public:
-    RerootingDP(int n, const F& op, const M& e, const G& propagate, const H& apply) : n(n), op(op), e(e), propagate(propagate), apply(apply), graph(n), dp(n, e) {}
+    constexpr RerootingDP(size_t n, const F& op, const M& e, const G& propagate, const H& apply) : op(op), e(e), propagate(propagate), apply(apply), graph(n), dp(n, e), built(false) {}
 
-    RerootingDP(const std::vector<std::vector<std::pair<W, int>>>& graph, const F& op, const M& e, const G& propagate, const H& apply) : n(graph.size()), op(op), e(e), propagate(propagate), apply(apply), graph(graph), dp(graph.size(), e) {}
+    constexpr RerootingDP(const std::vector<std::vector<std::pair<W, I>>>& graph, const F& op, const M& e, const G& propagate, const H& apply) : op(op), e(e), propagate(propagate), apply(apply), graph(graph), dp(graph.size(), e), built(false) {}
 
-    void add_edge(int u, int v, W cost = 1) {
+    constexpr bool add_edge(I u, I v, W cost = 1) {
+        assert(u < (I)graph.size());
+        assert(v < (I)graph.size());
+
+        if (built) return false;
+
         graph[u].emplace_back(cost, v);
         graph[v].emplace_back(cost, u);
+
+        return true;
     }
 
-    void run() {
-        bottom_up(0, -1);
-        top_down(0, -1, e);
-    }
+    constexpr M get(I node) {
+        if (!built) run(node);
 
-    M get(int node) {
         return dp[node];
     }
 };
