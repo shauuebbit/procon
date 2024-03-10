@@ -42,8 +42,8 @@ TEST(PointTest, Comparation) {
 TEST(PointTest, Zero) {
     Point<int> p;
 
-    ASSERT_EQ(p.x, 0);
-    ASSERT_EQ(p.y, 0);
+    ASSERT_EQ(p.x(), 0);
+    ASSERT_EQ(p.y(), 0);
 }
 
 TEST(PointTest, Cross) {
