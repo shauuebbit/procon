@@ -49,7 +49,7 @@ class VecGenerator {
        public:
         constexpr explicit Iterator(size_t init_len, const T& min_val, const T& max_val) : min_val(min_val), max_val(max_val), vals(init_len, min_val) {}
 
-        constexpr std::vector<T> operator*() const noexcept { return this->vals; }
+        constexpr const std::vector<T>& operator*() const noexcept { return this->vals; }
 
         constexpr Iterator& operator++() {
             this->next();
