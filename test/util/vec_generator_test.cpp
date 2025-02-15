@@ -56,10 +56,9 @@ TEST_P(IntValTest, test) {
     }
 
     // completeness check
-    size_t num = 0;
-    for (size_t len = MIN_LEN; len <= MAX_LEN; len++) {
-        num += power(MAX_VAL - MIN_VAL + 1, len);
-    }
+    // the number of generated vectors must be (val_range)^MIN_LEN + ... + (val_range)^MAX_LEN
+    // where val_range := MAX_VAL - MIN_VAL + 1
+    size_t num = MIN_VAL == MAX_VAL ? (MAX_LEN - MIN_LEN + 1) : (power(MAX_VAL - MIN_VAL + 1, MAX_LEN + 1) - power(MAX_VAL - MIN_VAL + 1, MIN_LEN)) / (MAX_VAL - MIN_VAL);
     EXPECT_EQ(s.size(), num);
 }
 
