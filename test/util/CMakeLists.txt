@@ -13,3 +13,7 @@ gtest_discover_tests(MoTest)
 add_executable(TimerTest timer_test.cpp)
 target_link_libraries(TimerTest gtest_main)
 gtest_discover_tests(TimerTest)
+
+add_executable(VecGeneratorTest vec_generator_test.cpp)
+target_link_libraries(VecGeneratorTest gtest_main)
+gtest_discover_tests(VecGeneratorTest)
