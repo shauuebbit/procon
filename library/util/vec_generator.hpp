@@ -32,12 +32,14 @@ class VecGenerator {
         std::vector<T> vals;
 
         void next() {
-            for (size_t i = vals.size(); i-- > 0;) {
-                if (vals[i] < max_val) {
-                    vals[i] += 1;
-                    return;
-                } else {
-                    vals[i] = min_val;
+            if (min_val != max_val) {
+                for (size_t i = vals.size(); i-- > 0;) {
+                    if (vals[i] < max_val) {
+                        vals[i] += 1;
+                        return;
+                    } else {
+                        vals[i] = min_val;
+                    }
                 }
             }
 
