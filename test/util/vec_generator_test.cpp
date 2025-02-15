@@ -6,14 +6,16 @@
 
 struct IntValTestParam {
    private:
+    using T = int;
+
     std::string test_name;
     size_t min_size;
     size_t max_size;
-    int min_val;
-    int max_val;
+    T min_val;
+    T max_val;
 
    public:
-    constexpr IntValTestParam(const std::string& test_name, size_t min_size, size_t max_size, int min_val, int max_val) : test_name(test_name), min_size(min_size), max_size(max_size), min_val(min_val), max_val(max_val) {}
+    constexpr IntValTestParam(const std::string& test_name, size_t min_size, size_t max_size, T min_val, T max_val) : test_name(test_name), min_size(min_size), max_size(max_size), min_val(min_val), max_val(max_val) {}
 
     auto get_test_name() const noexcept { return test_name; }
     auto get_min_size() const noexcept { return min_size; }
@@ -30,6 +32,7 @@ class IntValTest : public ::testing::TestWithParam<IntValTestParam> {};
 
 TEST_P(IntValTest, test) {
     using T = int;
+
     const auto param = GetParam();
     const size_t MIN_LEN = param.get_min_size();
     const size_t MAX_LEN = param.get_max_size();
