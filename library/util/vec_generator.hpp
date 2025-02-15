@@ -2,6 +2,8 @@
 
 #include <vector>
 
+// Generate std::vector<T>
+// len \in [min_len, max_len], val \in [min_val, max_val]
 template <typename T>
 class VecGenerator {
    private:
