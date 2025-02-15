@@ -41,7 +41,7 @@ TEST_P(IntValTest, test) {
 
     std::set<std::vector<T>> s;
 
-    for (auto v : VecGenerator(MIN_LEN, MAX_LEN, MIN_VAL, MAX_VAL)) {
+    for (const auto& v : VecGenerator(MIN_LEN, MAX_LEN, MIN_VAL, MAX_VAL)) {
         // len range check
         EXPECT_GE(v.size(), MIN_LEN);
         EXPECT_LE(v.size(), MAX_LEN);

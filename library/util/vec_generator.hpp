@@ -32,12 +32,14 @@ class VecGenerator {
         std::vector<T> vals;
 
         void next() {
-            for (size_t i = vals.size(); i-- > 0;) {
-                if (vals[i] < max_val) {
-                    vals[i] += 1;
-                    return;
-                } else {
-                    vals[i] = min_val;
+            if (min_val != max_val) {
+                for (size_t i = vals.size(); i-- > 0;) {
+                    if (vals[i] < max_val) {
+                        vals[i] += 1;
+                        return;
+                    } else {
+                        vals[i] = min_val;
+                    }
                 }
             }
 
@@ -47,16 +49,11 @@ class VecGenerator {
        public:
         constexpr explicit Iterator(size_t init_len, const T& min_val, const T& max_val) : min_val(min_val), max_val(max_val), vals(init_len, min_val) {}
 
-        constexpr std::vector<T> operator*() const noexcept { return this->vals; }
+        constexpr const std::vector<T>& operator*() const noexcept { return this->vals; }
 
         constexpr Iterator& operator++() {
             this->next();
             return *this;
-        }
-        constexpr Iterator operator++(int) {
-            auto vals = *this;
-            ++*this;
-            return vals;
         }
 
         friend constexpr bool operator==(const Iterator& iterator, const Sentinel& sentinel) {
