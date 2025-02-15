@@ -53,11 +53,6 @@ class VecGenerator {
             this->next();
             return *this;
         }
-        constexpr Iterator operator++(int) {
-            auto vals = *this;
-            ++*this;
-            return vals;
-        }
 
         friend constexpr bool operator==(const Iterator& iterator, const Sentinel& sentinel) {
             return iterator.vals.size() == sentinel.unreachable_len;
