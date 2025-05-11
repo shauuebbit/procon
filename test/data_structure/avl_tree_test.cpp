@@ -110,7 +110,7 @@ TEST(AVLTreeTest, InsertAndErase) {
     multiset<int> s;
 
     int n = 3000;
-    
+
     for (int i = 0; i < n; i++) {
         int r = i % 3;
         if (r == 0) {
@@ -155,7 +155,7 @@ TEST(AVLTreeTest, GetKthKey) {
     multiset<int> s;
 
     int n = 3000;
-    
+
     for (int i = 0; i < n; i++) {
         int r = i % 3;
         if (r == 0) {
