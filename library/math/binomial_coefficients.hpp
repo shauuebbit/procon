@@ -41,4 +41,3 @@ class BinomialCoefficients {
         delete[] inverse;
     }
 };
-Z
