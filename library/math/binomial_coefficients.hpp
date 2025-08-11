@@ -12,7 +12,7 @@ class BinomialCoefficients {
     mint *inverse;
 
    public:
-   mint get(int n, int k) {
+    mint get(int n, int k) const {
         if (n < 0 || k < 0 || k > n)
             return 0;
         else
@@ -41,3 +41,4 @@ class BinomialCoefficients {
         delete[] inverse;
     }
 };
+Z
