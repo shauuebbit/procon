@@ -45,5 +45,8 @@ class BinaryIndexedTree {
         return index;
     }
 
-    size_t size() { return data.size() - 1; }
+    size_t size() const {
+        assert(data.size() > 0);
+        return data.size() - 1;
+    }
 };
