@@ -23,7 +23,7 @@ vector<vector<pair<long long, int>>> generate_random_directed_graph(int n, int m
 
     set<pair<int, int>> edges;
 
-    while (edges.size() < m) {
+    while ((int)edges.size() < m) {
         int u = dist(engine);
         int v = dist(engine);
 
@@ -49,7 +49,7 @@ bool test_max_flow_by_dinic(int n, int m, function<vector<vector<pair<long long,
 
     Dinic<long long> graph(n);
 
-    for (int node = 0; node < g.size(); node++) {
+    for (int node = 0; node < (int)g.size(); node++) {
         for (auto [cost, next] : g[node]) {
             graph.add_edge(node, next, cost);
         }
@@ -69,7 +69,7 @@ bool test_max_flow_by_dinic(int n, int m, function<vector<vector<pair<long long,
 
         long long f = 0;
 
-        for (int node = 0; node < g.size(); node++) {
+        for (int node = 0; node < (int)g.size(); node++) {
             if (~(b >> node) & 1) continue;
 
             for (auto [cost, next] : g[node]) {
@@ -85,7 +85,7 @@ bool test_max_flow_by_dinic(int n, int m, function<vector<vector<pair<long long,
             min_cut = f;
 
             bool r = true;
-            for (int node = 0; node < g.size(); node++) {
+            for (int node = 0; node < (int)g.size(); node++) {
                 if (((b >> node) & 1) != (mc[node])) {
                     r = false;
                     break;
@@ -110,7 +110,7 @@ bool test_max_flow_by_dinic_and_ford_fulkerson(int n, int m, function<vector<vec
     FordFulkerson<long long> graph_f(n);
     Dinic<long long> graph_d(n);
 
-    for (int node = 0; node < g.size(); node++) {
+    for (int node = 0; node < (int)g.size(); node++) {
         for (auto [cost, next] : g[node]) {
             graph_f.add_edge(node, next, cost);
             graph_d.add_edge(node, next, cost);

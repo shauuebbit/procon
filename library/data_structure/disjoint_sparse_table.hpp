@@ -39,7 +39,6 @@ class DisjointSparseTable {
     T fold(unsigned int l, unsigned int r) {
         // [l, r)
         assert(l < r);
-        assert(l >= 0);
         assert(r <= table[0].size());
         --r;
 

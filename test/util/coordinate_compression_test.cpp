@@ -26,7 +26,7 @@ TEST(CoordinateCompressionTest, Add) {
     ASSERT_EQ(cmp.compress(5), 3);
     ASSERT_EQ(cmp.compress(80000000000ll), 4);
 
-    for (int i = 0; i < cmp.size(); i++) {
+    for (size_t i = 0; i < cmp.size(); i++) {
         ASSERT_EQ(cmp.compress(cmp.uncompress(i)), i);
     }
 }
@@ -49,7 +49,7 @@ TEST(CoordinateCompressionTest, ConstructWithVector) {
     ASSERT_EQ(cmp.compress(5), 3);
     ASSERT_EQ(cmp.compress(8), 4);
 
-    for (int i = 0; i < cmp.size(); i++) {
+    for (size_t i = 0; i < cmp.size(); i++) {
         ASSERT_EQ(cmp.compress(cmp.uncompress(i)), i);
     }
 }

@@ -6,10 +6,12 @@ TEST(UnionFindTest, SameSmall) {
     int n = 10;
     UnionFind uf(n);
 
-    uf.unite(0, 2);
+    ASSERT_TRUE(uf.unite(0, 2));
 
     ASSERT_TRUE(uf.is_same(0, 2));
     ASSERT_FALSE(uf.is_same(0, 1));
+
+    ASSERT_FALSE(uf.unite(0, 2));
 }
 
 TEST(UnionFindTest, SizeSmall) {
@@ -20,7 +22,7 @@ TEST(UnionFindTest, SizeSmall) {
 
     ASSERT_EQ(uf.size(), n);
 
-    uf.unite(0, 2);
+    ASSERT_TRUE(uf.unite(0, 2));
 
     ASSERT_EQ(uf.size(), n - 1);
 

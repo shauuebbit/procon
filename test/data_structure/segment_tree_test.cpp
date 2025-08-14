@@ -34,7 +34,7 @@ TEST(SegmentTreeTest, RandomRangeMinimumQuery) {
         int i = dist_idx(engine);
         int x = dist_val(engine);
 
-        segtree.update(i, x);
+        segtree.set(i, x);
         v[i] = x;
 
         int l = 0, r = n;
@@ -59,6 +59,9 @@ TEST(SegmentTreeTest, RandomRangeMinimumQuery) {
         }
 
         ASSERT_EQ(segtree.fold(l, r), x);
+
+        int j = dist_idx(engine);
+        ASSERT_EQ(segtree.get(j), v[j]);
     }
 }
 
@@ -81,7 +84,7 @@ TEST(SegmentTreeTest, RandomRangeMaximumQuery) {
         int i = dist_idx(engine);
         int x = dist_val(engine);
 
-        segtree.update(i, x);
+        segtree.set(i, x);
         v[i] = x;
 
         int l = 0, r = n;
@@ -106,6 +109,9 @@ TEST(SegmentTreeTest, RandomRangeMaximumQuery) {
         }
 
         ASSERT_EQ(segtree.fold(l, r), x);
+
+        int j = dist_idx(engine);
+        ASSERT_EQ(segtree.get(j), v[j]);
     }
 }
 
@@ -131,7 +137,7 @@ TEST(SegmentTreeTest, RandomRangeSumQuery) {
         int i = dist_idx(engine);
         long long x = static_cast<long long>(dist_val(engine));
 
-        segtree.update(i, x);
+        segtree.set(i, x);
         v[i] = x;
 
         int l = 0, r = n;
@@ -156,6 +162,9 @@ TEST(SegmentTreeTest, RandomRangeSumQuery) {
         }
 
         ASSERT_EQ(segtree.fold(l, r), x);
+
+        int j = dist_idx(engine);
+        ASSERT_EQ(segtree.get(j), v[j]);
     }
 }
 
@@ -198,7 +207,7 @@ TEST(SegmentTreeTest, RandomLinearComposition) {
         int i = dist_idx(engine);
         S x = {dist_val(engine), dist_val(engine)};
 
-        segtree.update(i, x);
+        segtree.set(i, x);
         v[i] = x;
 
         int l = 0, r = n;
@@ -223,5 +232,8 @@ TEST(SegmentTreeTest, RandomLinearComposition) {
         }
 
         ASSERT_EQ(segtree.fold(l, r), x);
+
+        int j = dist_idx(engine);
+        ASSERT_EQ(segtree.get(j), v[j]);
     }
 }

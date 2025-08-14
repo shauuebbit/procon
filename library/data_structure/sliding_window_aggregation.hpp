@@ -8,14 +8,14 @@
 template <typename T, typename F = std::function<T(T, T)>>
 class SlidingWindowAggregation {
    private:
-    T prod_right;
     F op;
     T e;
+    T prod_right;
     std::stack<T, std::vector<T>> stack_prod_left;
     std::stack<T, std::vector<T>> stack_prod_right;
 
    public:
-    SlidingWindowAggregation(const F& op, const T& e) : op(op), prod_right(e), e(e) {}
+    SlidingWindowAggregation(const F& op, const T& e) : op(op), e(e), prod_right(e) {}
 
     void push(const T& x) {
         stack_prod_right.push(x);
