@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <limits>
+#include <optional>
 #include <set>
 
 template <typename T, typename Compare = std::less<T>>

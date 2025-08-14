@@ -5,12 +5,12 @@
 using namespace std;
 
 TEST(ManacherTest, Small1) {
-    for (const string& s : {"aabacabbaaababbabaabbbbaba", "d", "abababababab", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}) {
+    for (const string s : {"aabacabbaaababbabaabbbbaba", "d", "abababababab", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}) {
         auto res = z_algorithm(s);
 
-        for (int i = 0; i < s.size(); i++) {
+        for (int i = 0; i < (int)s.size(); i++) {
             int l = 0;
-            while (i + l < s.size() && s[l] == s[i + l]) ++l;
+            while (i + l < (int)s.size() && s[l] == s[i + l]) ++l;
 
             ASSERT_EQ(res[i], l);
         }
@@ -22,9 +22,9 @@ TEST(KMPTest, Small2) {
 
     auto res = z_algorithm(s);
 
-    for (int i = 0; i < s.size(); i++) {
+    for (int i = 0; i < (int)s.size(); i++) {
         int l = 0;
-        while (i + l < s.size() && s[l] == s[i + l]) ++l;
+        while (i + l < (int)s.size() && s[l] == s[i + l]) ++l;
 
         ASSERT_EQ(res[i], l);
     }

@@ -7,7 +7,7 @@ std::vector<int> manacher(const std::string& s) {
     std::vector<int> ret(s.size());
 
     for (int i = 0, j = 0; i < (int)s.size();) {
-        while (i - j >= 0 && i + j < s.size() && s[i - j] == s[i + j]) {
+        while (i - j >= 0 && i + j < (int)s.size() && s[i - j] == s[i + j]) {
             ++j;
         }
         ret[i] = j;
@@ -29,7 +29,7 @@ std::vector<int> manacher(const std::vector<T>& s) {
     std::vector<int> ret(s.size());
 
     for (int i = 0, j = 0; i < (int)s.size();) {
-        while (i - j >= 0 && i + j < s.size() && s[i - j] == s[i + j]) {
+        while (i - j >= 0 && i + j < (int)s.size() && s[i - j] == s[i + j]) {
             ++j;
         }
         ret[i] = j;

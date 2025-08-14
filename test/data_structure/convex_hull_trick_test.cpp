@@ -176,12 +176,12 @@ TEST(ConvexHullTrick, RandomMin) {
 
     std::vector<std::pair<long long, long long>> lines;
 
-    constexpr int LINE_MAX = 50;
-    constexpr int QUERY_MAX = LINE_MAX * 2 + 1;
+    constexpr int LINE_PARAM_MAX = 50;
+    constexpr int QUERY_MAX = LINE_PARAM_MAX * 2 + 1;
     random_device seed_gen;
     mt19937 engine(seed_gen());
 
-    uniform_int_distribution<> dist_line(-LINE_MAX, LINE_MAX);
+    uniform_int_distribution<> dist_line(-LINE_PARAM_MAX, LINE_PARAM_MAX);
 
     constexpr long long INF = 1ll << 60;
 
@@ -211,12 +211,12 @@ TEST(ConvexHullTrick, RandomMax) {
 
     std::vector<std::pair<long long, long long>> lines;
 
-    constexpr int LINE_MAX = 4000;
-    constexpr int QUERY_MAX = LINE_MAX * 2 + 1;
+    constexpr int LINE_PARAM_MAX = 4000;
+    constexpr int QUERY_MAX = LINE_PARAM_MAX * 2 + 1;
     random_device seed_gen;
     mt19937 engine(seed_gen());
 
-    uniform_int_distribution<> dist_line(-LINE_MAX, LINE_MAX);
+    uniform_int_distribution<> dist_line(-LINE_PARAM_MAX, LINE_PARAM_MAX);
 
     constexpr long long INF = 1ll << 60;
 

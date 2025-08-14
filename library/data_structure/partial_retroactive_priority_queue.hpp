@@ -32,8 +32,8 @@ class PartialRetroactivePriorityQueue {
               max_key_not_contained(std::nullopt),
               min_key_contained(key),
               min_prefix_sum_label(label),
-              lazy_prefix_sum_label(0),
               subtree_size(1),
+              lazy_prefix_sum_label(0),
               left_child(nullptr),
               right_child(nullptr),
               parent(nullptr) {}
@@ -536,9 +536,7 @@ class PartialRetroactivePriorityQueue {
         Node* left = split_left(time);
         merge_left(left);
 
-        if (!left) {
-            return false;
-        }
+        if (!left) return false;
 
         Node* bridge = right_nearest_bridge(time);
 
@@ -597,7 +595,7 @@ class PartialRetroactivePriorityQueue {
 
     bool erase(const T& time) {
         if (!contains(time)) return false;
-        
+
         if (is_push(time)) {
             return erase_push(time);
         } else if (is_pop(time)) {

@@ -106,6 +106,8 @@ class ModInt {
 
         return (inv ? ModInt(y).inverse() : ModInt(y));
     }
+
+    constexpr bool operator==(const ModInt& rhs) const { return this->get() == rhs.get(); }
 };
 
 template <long long mod>

@@ -43,7 +43,7 @@ std::vector<T> dijkstra_with_fibonacci_heap(int src, const std::vector<std::vect
 
     std::vector<int> ids(graph.size()), nodes(graph.size());
 
-    for (int i = 0; i < graph.size(); i++) {
+    for (int i = 0; i < (int)graph.size(); i++) {
         ids[i] = heap.push(i == src ? 0 : INF);
         nodes[ids[i]] = i;
     }

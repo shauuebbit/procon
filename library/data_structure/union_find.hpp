@@ -9,7 +9,7 @@ class UnionFind {
     std::vector<int> data;
 
    public:
-    UnionFind(size_t n = 0) : data(n, -1), sz(n) {}
+    UnionFind(size_t n = 0) : sz(n), data(n, -1) {}
 
     size_t find(size_t x) {
         assert(x < data.size());
