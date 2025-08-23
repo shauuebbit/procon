@@ -6,6 +6,14 @@ add_executable(BinaryIndexedTreeTest binary_indexed_tree_test.cpp)
 target_link_libraries(BinaryIndexedTreeTest gtest_main)
 gtest_discover_tests(BinaryIndexedTreeTest)
 
+add_executable(ConvexHullTrickTest convex_hull_trick_test.cpp)
+target_link_libraries(ConvexHullTrickTest gtest_main)
+gtest_discover_tests(ConvexHullTrickTest)
+
+add_executable(DisjointSparseTableTest disjoint_sparse_table_test.cpp)
+target_link_libraries(DisjointSparseTableTest gtest_main)
+gtest_discover_tests(DisjointSparseTableTest)
+
 add_executable(FibonacciHeapTest fibonacci_heap_test.cpp)
 target_link_libraries(FibonacciHeapTest gtest_main)
 gtest_discover_tests(FibonacciHeapTest)
@@ -14,6 +22,10 @@ add_executable(LazySegmentTreeTest lazy_segment_tree_test.cpp)
 target_link_libraries(LazySegmentTreeTest gtest_main)
 gtest_discover_tests(LazySegmentTreeTest)
 
+add_executable(PartialRetroactivePriorityQueueTest partial_retroactive_priority_queue_test.cpp)
+target_link_libraries(PartialRetroactivePriorityQueueTest gtest_main)
+gtest_discover_tests(PartialRetroactivePriorityQueueTest)
+
 add_executable(SegmentTreeTest segment_tree_test.cpp)
 target_link_libraries(SegmentTreeTest gtest_main)
 gtest_discover_tests(SegmentTreeTest)
@@ -21,6 +33,10 @@ gtest_discover_tests(SegmentTreeTest)
 add_executable(SlidingWindowAggregationTest sliding_window_aggregation_test.cpp)
 target_link_libraries(SlidingWindowAggregationTest gtest_main)
 gtest_discover_tests(SlidingWindowAggregationTest)
+
+add_executable(SplayTreeTest splay_tree_test.cpp)
+target_link_libraries(SplayTreeTest gtest_main)
+gtest_discover_tests(SplayTreeTest)
 
 add_executable(UnionFindTest union_find_test.cpp)
 target_link_libraries(UnionFindTest gtest_main)

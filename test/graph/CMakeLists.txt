@@ -1,6 +1,6 @@
-add_executable(Dijkstra dijkstra_test.cpp)
-target_link_libraries(Dijkstra gtest_main)
-gtest_discover_tests(Dijkstra)
+add_executable(DijkstraTest dijkstra_test.cpp)
+target_link_libraries(DijkstraTest gtest_main)
+gtest_discover_tests(DijkstraTest)
 
 add_executable(DinicTest dinic_test.cpp)
 target_link_libraries(DinicTest gtest_main)

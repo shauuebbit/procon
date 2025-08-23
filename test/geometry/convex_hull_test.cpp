@@ -83,7 +83,7 @@ TEST(ConvexHullTest, RandomLarge) {
         auto ch = convex_hull(points);
 
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < ch.size(); j++) {
+            for (int j = 0; j < (int)ch.size(); j++) {
                 ASSERT_GE(cross(ch[(j + 1) % ch.size()] - ch[j], points[i] - ch[j]), 0);
             }
         }

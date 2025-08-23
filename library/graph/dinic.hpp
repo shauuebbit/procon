@@ -69,7 +69,7 @@ class Dinic {
         T flow(0);
 
         while (idx.assign(graph.size(), 0), bfs()) {
-            for (T f; f = dfs(dfs, src, std::numeric_limits<T>::max());) {
+            for (T f; (f = dfs(dfs, src, std::numeric_limits<T>::max()));) {
                 flow += f;
             }
         }

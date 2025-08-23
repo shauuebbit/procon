@@ -23,7 +23,7 @@ vector<vector<pair<long long, int>>> generate_random_undirected_graph(int n) {
 
     set<pair<int, int>> edges;
 
-    while (uf.size(0) < n) {
+    while ((int)uf.size(0) < n) {
         int u = distrib(engine);
         int v = distrib(engine);
 
@@ -83,17 +83,17 @@ template <typename T>
 std::vector<std::vector<T>> warshall_floyd(const std::vector<std::vector<std::pair<T, int>>>& graph) {
     const T INF = std::numeric_limits<T>::max();
     std::vector<std::vector<T>> distance(graph.size(), std::vector<T>(graph.size(), INF));
-    for (int i = 0; i < graph.size(); i++) distance[i][i] = 0;
+    for (int i = 0; i < (int)graph.size(); i++) distance[i][i] = 0;
 
-    for (int i = 0; i < graph.size(); i++) {
+    for (int i = 0; i < (int)graph.size(); i++) {
         for (const auto& [cost, j] : graph[i]) {
             distance[i][j] = min(distance[i][j], cost);
         }
     }
 
-    for (int k = 0; k < graph.size(); k++) {
-        for (int i = 0; i < graph.size(); i++) {
-            for (int j = 0; j < graph.size(); j++) {
+    for (int k = 0; k < (int)graph.size(); k++) {
+        for (int i = 0; i < (int)graph.size(); i++) {
+            for (int j = 0; j < (int)graph.size(); j++) {
                 if (distance[i][k] < INF && distance[k][j] < INF && distance[i][k] + distance[k][j] < distance[i][j]) {
                     distance[i][j] = distance[i][k] + distance[k][j];
                 }

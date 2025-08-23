@@ -138,8 +138,8 @@ TEST(MoTest, RandomNumberOfKinds) {
 
     vector<int> mo_ans(q);
 
-    auto answer = [&](int idx) {
-        mo_ans[idx] = num_kinds;
+    auto answer = [&](int query_idx) {
+        mo_ans[query_idx] = num_kinds;
     };
 
     mo.run(n, expand, expand, shrink, shrink, answer);

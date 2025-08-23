@@ -15,7 +15,7 @@ constexpr int MOD = 1000000009;
 TEST(BinomialCoefficientsTest, Zero) {
     int n = 1000;
 
-    BinomialCoefficients<> binom(n, MOD);
+    BinomialCoefficients<MOD> binom(n);
 
     ASSERT_EQ(binom.get(-1, 0), 0);
     ASSERT_EQ(binom.get(n / 2, -1), 0);
@@ -25,7 +25,7 @@ TEST(BinomialCoefficientsTest, Zero) {
 TEST(BinomialCoefficientsTest, Small) {
     int n = 1000;
 
-    BinomialCoefficients<> binom(n, MOD);
+    BinomialCoefficients<MOD> binom(n);
 
     vector b(n + 1, vector<long long>(n + 1, 0ll));
 
@@ -54,7 +54,7 @@ TEST(BinomialCoefficientsTest, LargeRandom) {
     int n = 1000000;
     int q = 100000;
 
-    BinomialCoefficients<> binom(n, MOD);
+    BinomialCoefficients<MOD> binom(n);
 
     uniform_int_distribution<> distrib(0, n);
 
