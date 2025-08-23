@@ -4,7 +4,7 @@
 
 using namespace std;
 
-TEST(ManacherTest, Small1) {
+TEST(ZAlgorithmTest, Small1) {
     for (const string s : {"aabacabbaaababbabaabbbbaba", "d", "abababababab", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}) {
         auto res = z_algorithm(s);
 
@@ -17,7 +17,7 @@ TEST(ManacherTest, Small1) {
     }
 }
 
-TEST(KMPTest, Small2) {
+TEST(ZAlgorithmTest, Small2) {
     const vector<int> s = {1, 0, 1, 0, 1, 1, 0, 0, 1, 2, 0, 1, 2, 0, 1, 1, 0, 0, 1, 0, 1, 0};
 
     auto res = z_algorithm(s);
