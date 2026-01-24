@@ -17,7 +17,7 @@ TEST(ManacherTest, Small1) {
     }
 }
 
-TEST(KMPTest, Small2) {
+TEST(ManacherTest, Small2) {
     const vector<int> s = {1, 0, 1, 0, 1, 1, 0, 0, 1, 2, 0, 1, 2, 0, 1, 1, 0, 0, 1, 0, 1, 0};
 
     auto res = manacher(s);
