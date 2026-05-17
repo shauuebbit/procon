@@ -48,10 +48,10 @@ TEST(TrieTest, Contains2) {
     ASSERT_TRUE(trie.contains(s4));
     ASSERT_TRUE(trie.contains(s5));
 
-    std::string p1 = {2};
-    std::string p2 = {3};
-    std::string p3 = {2, 1, 2};
-    std::string p4 = {2, 1, 3};
+    std::vector<int> p1 = {2};
+    std::vector<int> p2 = {3};
+    std::vector<int> p3 = {2, 1, 2};
+    std::vector<int> p4 = {2, 1, 3};
 
     ASSERT_TRUE(trie.contains(p1));
     ASSERT_FALSE(trie.contains(p2));
