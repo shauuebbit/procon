@@ -1,8 +1,8 @@
 #pragma once
 
 #include <algorithm>
-#include <vector>
 #include <utility>
+#include <vector>
 
 #include "point.hpp"
 
@@ -24,9 +24,7 @@ constexpr void arg_sort(std::vector<Point<T>>& points) {
         auto o1 = ord(p1);
         if (o0 != o1)
             return o0 < o1;
-        else if (o0 == 1)
-            return p0.x() > p1.x();
         else
-            return p0.x() < p1.x();
+            return p0.x() * p1.y() > p1.x() * p0.y();
     });
 }
