@@ -10,6 +10,10 @@ add_executable(GCDLCMTest gcd_lcm_test.cpp)
 target_link_libraries(GCDLCMTest gtest_main)
 gtest_discover_tests(GCDLCMTest)
 
+add_executable(DivisionTest division_test.cpp)
+target_link_libraries(DivisionTest gtest_main)
+gtest_discover_tests(DivisionTest)
+
 add_executable(InverseTest inverse_test.cpp)
 target_link_libraries(InverseTest gtest_main)
 gtest_discover_tests(InverseTest)
