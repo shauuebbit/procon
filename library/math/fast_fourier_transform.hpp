@@ -14,8 +14,7 @@ void fast_fourier_transform(std::vector<std::complex<T>>& signal) {
         }
         std::swap(signal[i + (length >> 1)], signal[j + 1]);
 
-        for (size_t k = length >> 2; k > (j ^= k); k >>= 1)
-            ;
+        for (size_t k = length >> 2; k > (j ^= k); k >>= 1);
     }
 
     for (size_t k = 1; k < length; k <<= 1) {
@@ -51,8 +50,7 @@ template <typename T = double>
 std::vector<std::complex<T>> convolute(std::vector<std::complex<T>> signal1, std::vector<std::complex<T>> signal2) {
     size_t length = signal1.size() + signal2.size() + 1;
     size_t l = 1;
-    for (; l < length; l <<= 1)
-        ;
+    for (; l < length; l <<= 1);
 
     signal1.resize(l);
     signal2.resize(l);
