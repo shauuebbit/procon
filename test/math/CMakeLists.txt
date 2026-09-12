@@ -22,6 +22,10 @@ add_executable(MatrixProductTest matrix_product_test.cpp)
 target_link_libraries(MatrixProductTest gtest_main)
 gtest_discover_tests(MatrixProductTest)
 
+add_executable(MillerRabinTest miller_rabin_test.cpp)
+target_link_libraries(MillerRabinTest gtest_main)
+gtest_discover_tests(MillerRabinTest)
+
 add_executable(ModIntTest modint_test.cpp)
 target_link_libraries(ModIntTest gtest_main)
 gtest_discover_tests(ModIntTest)
